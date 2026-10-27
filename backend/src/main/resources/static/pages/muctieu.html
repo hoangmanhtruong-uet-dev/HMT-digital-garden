@@ -1,47 +1,337 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Lộ trình phát triển cá nhân hướng tới Solutions Architect của Hoàng Mạnh Trường.">
   <title>SA.Path — Mục Tiêu Cá Nhân</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css"><link rel="stylesheet" href="../assets/css/common.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link rel="stylesheet" href="../assets/css/goals-page.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/common.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/goals-page.css">
 </head>
-<body class="sa-path-page">
-  <nav class="navbar-unified" aria-label="Điều hướng chính"><a href="../index.html" class="nav-logo"><i class="fa-solid fa-circle-user"></i> Mtruong<span>_dev</span></a><ul class="nav-links-unified"><li><a href="../index.html">Trang Chủ</a></li></ul><div id="auth-controls" class="nav-auth"><button class="theme-toggle" type="button" title="Chuyển chế độ Sáng/Tối" aria-label="Chuyển chế độ Sáng/Tối"><i class="fa-solid fa-moon"></i></button></div></nav>
-  <main class="sa-shell">
-    <header class="sa-hero reveal">
-      <div class="sa-hero-copy"><div class="sa-kicker"><span class="live-dot"></span>SA.PATH / EXECUTIVE ROADMAP</div><h1>Lộ trình trở thành<br><span>Solutions Architect</span></h1><p>Một dashboard sống để theo dõi năng lực kỹ thuật, trải nghiệm thực chiến và các cột mốc nghề nghiệp — rõ mục tiêu, rõ tiến độ, rõ bước tiếp theo.</p><div class="hero-actions"><a class="sa-button primary" href="#objectives"><i class="fa-solid fa-crosshairs"></i>Xem mục tiêu hiện tại</a><a class="sa-button" href="#roadmap"><i class="fa-solid fa-route"></i>Mở lộ trình</a></div></div>
-      <div class="hero-progress"><div class="progress-orbit" id="overall-progress-orbit"><strong id="overall-progress">0%</strong><span>Hoàn thành tổng thể</span></div><div class="hero-stage"><span>Giai đoạn hiện tại</span><strong>Build &amp; Validate</strong><small>Backend · Cloud · Communication</small></div></div>
-    </header>
-    <nav class="section-rail" aria-label="Điều hướng trang mục tiêu"><a class="active" href="#overview"><i class="fa-solid fa-chart-line"></i><span>Tổng quan</span></a><a href="#objectives"><i class="fa-solid fa-bullseye"></i><span>Mục tiêu</span></a><a href="#roadmap"><i class="fa-solid fa-route"></i><span>Roadmap</span></a><a href="#capabilities"><i class="fa-solid fa-layer-group"></i><span>Năng lực</span></a></nav>
+<body class="sa-path-page" data-theme="dark">
+  <nav class="navbar-unified" aria-label="Điều hướng chính"><a href="../index.html" class="nav-logo"><i class="fa-solid fa-circle-user"></i> Mtruong<span>_dev</span></a>        <ul class="nav-links-unified">
+            <li><a href="../index.html">Trang Chủ</a></li>
+            <li><a href="about.html">Cá Nhân</a></li>
+            <li>
+                <a href="teaching.html">Giảng Dạy <i class="fa-solid fa-angle-down" style="font-size: 0.7em;"></i></a>
+                <ul class="nav-dropdown">
+                    <li><a href="teaching.html#about">Giới thiệu</a></li>
+                    <li><a href="teaching.html#programs">Lộ trình học</a></li>
+                    <li><a href="teaching.html#pricing">Học phí</a></li>
+                    <li><a href="teaching.html#resources">Góc học tập</a></li>
+                    <li><a href="teaching.html#research">Nghiên cứu</a></li>
+                </ul>
+            </li>
+            <li><a href="muctieu.html">Mục Tiêu</a></li>
+            <li><a href="projects.html">Dự Án</a></li>
+        </ul><div id="auth-controls" class="nav-auth"><label id="theme-toggle-button">
+  <input type="checkbox" id="toggle">
+  <svg viewBox="0 0 69.667 44" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(3.5 3.5)" data-name="Component 15 – 1" id="Component_15_1">
+      <g filter="url(#container)" transform="matrix(1, 0, 0, 1, -3.5, -3.5)">
+        <rect fill="#83cbd8" transform="translate(3.5 3.5)" rx="17.5" height="35" width="60.667" data-name="container" id="container"></rect>
+      </g>
+      <g transform="translate(2.333 2.333)" id="button">
+        <g data-name="sun" id="sun">
+          <g filter="url(#sun-outer)" transform="matrix(1, 0, 0, 1, -5.83, -5.83)">
+            <circle fill="#f8e664" transform="translate(5.83 5.83)" r="15.167" cy="15.167" cx="15.167" data-name="sun-outer" id="sun-outer-2"></circle>
+          </g>
+          <g filter="url(#sun)" transform="matrix(1, 0, 0, 1, -5.83, -5.83)">
+            <path fill="rgba(246,254,247,0.29)" transform="translate(9.33 9.33)" d="M11.667,0A11.667,11.667,0,1,1,0,11.667,11.667,11.667,0,0,1,11.667,0Z" data-name="sun" id="sun-3"></path>
+          </g>
+          <circle fill="#fcf4b9" transform="translate(8.167 8.167)" r="7" cy="7" cx="7" id="sun-inner"></circle>
+        </g>
+        <g data-name="moon" id="moon">
+          <g filter="url(#moon)" transform="matrix(1, 0, 0, 1, -31.5, -5.83)">
+            <circle fill="#cce6ee" transform="translate(31.5 5.83)" r="15.167" cy="15.167" cx="15.167" data-name="moon" id="moon-3"></circle>
+          </g>
+          <g fill="#a6cad0" transform="translate(-24.415 -1.009)" id="patches">
+            <circle transform="translate(43.009 4.496)" r="2" cy="2" cx="2"></circle>
+            <circle transform="translate(39.366 17.952)" r="2" cy="2" cx="2" data-name="patch"></circle>
+            <circle transform="translate(33.016 8.044)" r="1" cy="1" cx="1" data-name="patch"></circle>
+            <circle transform="translate(51.081 18.888)" r="1" cy="1" cx="1" data-name="patch"></circle>
+            <circle transform="translate(33.016 22.503)" r="1" cy="1" cx="1" data-name="patch"></circle>
+            <circle transform="translate(50.081 10.53)" r="1.5" cy="1.5" cx="1.5" data-name="patch"></circle>
+          </g>
+        </g>
+      </g>
+      <g filter="url(#cloud)" transform="matrix(1, 0, 0, 1, -3.5, -3.5)">
+        <path fill="#fff" transform="translate(-3466.47 -160.94)" d="M3512.81,173.815a4.463,4.463,0,0,1,2.243.62.95.95,0,0,1,.72-1.281,4.852,4.852,0,0,1,2.623.519c.034.02-.5-1.968.281-2.716a2.117,2.117,0,0,1,2.829-.274,1.821,1.821,0,0,1,.854,1.858c.063.037,2.594-.049,3.285,1.273s-.865,2.544-.807,2.626a12.192,12.192,0,0,1,2.278.892c.553.448,1.106,1.992-1.62,2.927a7.742,7.742,0,0,1-3.762-.3c-1.28-.49-1.181-2.65-1.137-2.624s-1.417,2.2-2.623,2.2a4.172,4.172,0,0,1-2.394-1.206,3.825,3.825,0,0,1-2.771.774c-3.429-.46-2.333-3.267-2.2-3.55A3.721,3.721,0,0,1,3512.81,173.815Z" data-name="cloud" id="cloud"></path>
+      </g>
+      <g fill="#def8ff" transform="translate(3.585 1.325)" id="stars">
+        <path transform="matrix(-1, 0.017, -0.017, -1, 24.231, 3.055)" d="M.774,0,.566.559,0,.539.458.933.25,1.492l.485-.361.458.394L1.024.953,1.509.592.943.572Z"></path>
+        <path transform="matrix(-0.777, 0.629, -0.629, -0.777, 23.185, 12.358)" d="M1.341.529.836.472.736,0,.505.46,0,.4.4.729l-.231.46L.605.932l.4.326L.9.786Z" data-name="star"></path>
+        <path transform="matrix(0.438, 0.899, -0.899, 0.438, 23.177, 29.735)" d="M.015,1.065.475.9l.285.365L.766.772l.46-.164L.745.494.751,0,.481.407,0,.293.285.658Z" data-name="star"></path>
+        <path transform="translate(12.677 0.388) rotate(104)" d="M1.161,1.6,1.059,1,1.574.722.962.607.86,0,.613.572,0,.457.446.881.2,1.454l.516-.274Z" data-name="star"></path>
+        <path transform="matrix(-0.07, 0.998, -0.998, -0.07, 11.066, 15.457)" d="M.873,1.648l.114-.62L1.579.945,1.03.62,1.144,0,.706.464.157.139.438.7,0,1.167l.592-.083Z" data-name="star"></path>
+        <path transform="translate(8.326 28.061) rotate(11)" d="M.593,0,.638.724,0,.982l.7.211.045.724.36-.64.7.211L1.342.935,1.7.294,1.063.552Z" data-name="star"></path>
+        <path transform="translate(5.012 5.962) rotate(172)" d="M.816,0,.5.455,0,.311.323.767l-.312.455.516-.215.323.456L.827.911,1.343.7.839.552Z" data-name="star"></path>
+        <path transform="translate(2.218 14.616) rotate(169)" d="M1.261,0,.774.571.114.3.487.967,0,1.538.728,1.32l.372.662.047-.749.728-.218L1.215.749Z" data-name="star"></path>
+      </g>
+    </g>
+  </svg>
+</label></div></nav>
 
-    <section class="dashboard-section" id="overview" aria-labelledby="overview-title"><div class="section-heading"><div><span class="section-index">01 / EXECUTIVE VIEW</span><h2 id="overview-title">Bảng điều hành phát triển</h2></div><p>Dữ liệu được tổng hợp trực tiếp từ các mục tiêu đang theo dõi.</p></div><div class="metric-grid" id="progress-overview" aria-live="polite"></div></section>
+  <div class="sa-layout">
+    <!-- SIDEBAR -->
+    <aside class="sa-sidebar" id="sa-sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-progress-ring">
+          <svg viewBox="0 0 36 36">
+            <path class="ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <path class="ring-fill" id="sb-ring" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+          </svg>
+          <span id="sb-progress-text">0%</span>
+        </div>
+        <div class="sidebar-header-text">
+          <strong>Tiến độ tổng thể</strong>
+          <span class="mono">Build & Validate</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav" aria-label="Mục lục trang">
+        <div class="nav-scroll-indicator" id="nav-indicator"></div>
+        
+        <a href="#tong-quan" class="nav-item is-active" data-target="tong-quan" aria-current="true">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Tổng quan</span>
+        </a>
+        
+        <div class="nav-item-group">
+          <a href="#muc-tieu" class="nav-item" data-target="muc-tieu">
+            <i class="fa-solid fa-crosshairs"></i>
+            <span>Mục tiêu</span>
+            <span class="badge" id="sb-goals-count">0</span>
+          </a>
+          <div class="nav-sub-items">
+            <button class="nav-filter active" data-filter="all">Tất cả</button>
+            <button class="nav-filter" data-filter="hoc-tap">Học tập</button>
+            <button class="nav-filter" data-filter="ky-nang">Kỹ năng</button>
+            <button class="nav-filter" data-filter="su-nghiep">Sự nghiệp</button>
+            <button class="nav-filter" data-filter="cuoc-song">Cuộc sống</button>
+          </div>
+        </div>
+        
+        <a href="#lo-trinh" class="nav-item" data-target="lo-trinh">
+          <i class="fa-solid fa-route"></i>
+          <span>Lộ trình</span>
+          <span class="badge" id="sb-roadmap-count">0</span>
+        </a>
+        
+        <a href="#nang-luc" class="nav-item" data-target="nang-luc">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>Năng lực</span>
+          <span class="badge" id="sb-cap-count">0</span>
+        </a>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <p class="mono" id="sb-last-update">Cập nhật: --/--/----</p>
+        <button class="btn-outline btn-sm"><i class="fa-solid fa-download"></i> Tải PDF lộ trình</button>
+        <button class="btn-toggle-sidebar" id="btn-toggle-sidebar" aria-label="Thu gọn sidebar">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+      </div>
+    </aside>
 
-    <section class="dashboard-section" id="objectives" aria-labelledby="objectives-title"><div class="section-heading objectives-heading"><div><span class="section-index">02 / ACTIVE OBJECTIVES</span><h2 id="objectives-title">Mục tiêu đang vận hành</h2></div><div class="goal-tabs" role="tablist" aria-label="Lọc mục tiêu"><button class="goal-tab active" type="button" role="tab" aria-selected="true" data-tab="all">Tất cả</button><button class="goal-tab" type="button" role="tab" aria-selected="false" data-tab="hoc-tap">Học tập</button><button class="goal-tab" type="button" role="tab" aria-selected="false" data-tab="ky-nang">Kỹ năng</button><button class="goal-tab" type="button" role="tab" aria-selected="false" data-tab="su-nghiep">Sự nghiệp</button><button class="goal-tab" type="button" role="tab" aria-selected="false" data-tab="cuoc-song">Cuộc sống</button></div></div><div class="goals-grid" id="goals-grid" aria-live="polite"></div></section>
+    <!-- MOBILE BOTTOM BAR -->
+    <nav class="mobile-bottom-bar">
+        <a href="#tong-quan" class="nav-item is-active" data-target="tong-quan">
+          <i class="fa-solid fa-chart-pie"></i><span>Tổng quan</span>
+        </a>
+        <a href="#muc-tieu" class="nav-item" data-target="muc-tieu">
+          <i class="fa-solid fa-crosshairs"></i><span>Mục tiêu</span>
+        </a>
+        <a href="#lo-trinh" class="nav-item" data-target="lo-trinh">
+          <i class="fa-solid fa-route"></i><span>Lộ trình</span>
+        </a>
+        <a href="#nang-luc" class="nav-item" data-target="nang-luc">
+          <i class="fa-solid fa-layer-group"></i><span>Năng lực</span>
+        </a>
+    </nav>
 
-    <section class="dashboard-section" id="roadmap" aria-labelledby="roadmap-title"><div class="section-heading"><div><span class="section-index">03 / CAREER ROADMAP</span><h2 id="roadmap-title">Roadmap kiến trúc sư giải pháp</h2></div><p>Từ nền tảng lập trình đến tư duy thiết kế hệ thống và năng lực dẫn dắt kỹ thuật.</p></div><div class="roadmap-board"><div class="roadmap-timeline">
-      <article class="roadmap-item done"><div class="roadmap-marker"><i class="fa-solid fa-check"></i></div><div class="roadmap-period">2022 — 2023</div><h3>Nền tảng lập trình</h3><p>Java, OOP, cấu trúc dữ liệu và giải thuật; xây nền tư duy giải quyết vấn đề.</p><span class="roadmap-state">Đã hoàn thành</span></article>
-      <article class="roadmap-item done"><div class="roadmap-marker"><i class="fa-solid fa-check"></i></div><div class="roadmap-period">2023 — 2024</div><h3>UET &amp; sản phẩm đầu tiên</h3><p>Spring Boot, MySQL và portfolio; chuyển kiến thức thành sản phẩm có thể vận hành.</p><span class="roadmap-state">Đã hoàn thành</span></article>
-      <article class="roadmap-item current"><div class="roadmap-marker"><i class="fa-solid fa-code-branch"></i></div><div class="roadmap-period">2024 — 2026</div><h3>Full-stack &amp; Cloud foundation</h3><p>Microservices, Docker, CI/CD, dạy học và tích hợp AI vào bài toán thực tế.</p><span class="roadmap-state">Đang thực hiện</span></article>
-      <article class="roadmap-item"><div class="roadmap-marker">04</div><div class="roadmap-period">2026 — 2027</div><h3>Thực chiến hệ thống</h3><p>Thực tập Java Backend, đóng góp open source và thiết kế workload trên cloud.</p><span class="roadmap-state">Kế tiếp</span></article>
-      <article class="roadmap-item"><div class="roadmap-marker">05</div><div class="roadmap-period">2027+</div><h3>Solutions Architect track</h3><p>Tích lũy ADR, C4, security, capacity planning và năng lực tư vấn giải pháp.</p><span class="roadmap-state">Định hướng</span></article>
-    </div><div class="tech-tree" aria-label="Cây kỹ năng kiến trúc">
-      <article><div class="tech-tree-top"><span>DATA FOUNDATION</span><strong class="mastered">MASTERED</strong></div><i class="fa-solid fa-database"></i><h3>PostgreSQL Indexing</h3><p>B-tree, Hash, GiST, GIN và chiến lược tối ưu truy vấn tải cao.</p><div class="tech-progress"><span style="width:82%"></span></div><small>82% · Production ready</small></article>
-      <article><div class="tech-tree-top"><span>EVENT SYSTEMS</span><strong>IN PROGRESS</strong></div><i class="fa-solid fa-tower-broadcast"></i><h3>Kafka &amp; Pub/Sub</h3><p>Partitioning, consumer groups và mô hình event-driven architecture.</p><div class="tech-progress"><span style="width:65%"></span></div><small>65% · Building lab</small></article>
-      <article><div class="tech-tree-top"><span>CLOUD DELIVERY</span><strong class="planned">TO LEARN</strong></div><i class="fa-solid fa-cubes-stacked"></i><h3>Docker &amp; Kubernetes</h3><p>Orchestration, deployment strategy, service mesh và cluster operations.</p><div class="tech-progress"><span style="width:38%"></span></div><small>38% · Foundation</small></article>
-      <article><div class="tech-tree-top"><span>SYSTEM DESIGN</span><strong>IN PROGRESS</strong></div><i class="fa-solid fa-sitemap"></i><h3>C4 &amp; Capacity Planning</h3><p>Context, container, component cùng ước lượng throughput và storage.</p><div class="tech-progress"><span style="width:55%"></span></div><small>55% · Practising</small></article>
-    </div></div></section>
+    <!-- MAIN CONTENT -->
+    <main class="sa-content">
+      
+      <!-- 1. TỔNG QUAN -->
+      <section id="tong-quan" class="sa-section">
+        <div class="overview-hero reveal">
+          <div class="hero-label mono">LỘ TRÌNH SOLUTIONS ARCHITECT · <span id="hero-date"></span></div>
+          <h1>Từ Java Backend đến <span class="text-gradient">Solutions Architect</span></h1>
+          <p class="hero-desc">Bảng điều khiển tiến độ nghề nghiệp: theo dõi các mục tiêu, kỹ năng, và kiến trúc hệ thống để định hướng con đường phát triển chuyên môn.</p>
+          <div class="hero-cta">
+            <a href="#muc-tieu" class="btn-primary">Xem mục tiêu đang chạy</a>
+            <a href="#lo-trinh" class="btn-outline">Mở lộ trình</a>
+          </div>
+        </div>
+        
+        <div class="stats-grid reveal" style="transition-delay: 0.1s">
+          <div class="stat-card">
+            <div class="stat-header">Tiến độ trung bình</div>
+            <div class="stat-value text-gradient" id="stat-avg">0%</div>
+            <div class="stat-desc">Dựa trên các mục tiêu hiện tại</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">Mục tiêu đang chạy</div>
+            <div class="stat-value" id="stat-active-goals">0/0</div>
+            <div class="stat-desc">Mục tiêu trong kế hoạch</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">Cột mốc hoàn thành</div>
+            <div class="stat-value" id="stat-milestones">0</div>
+            <div class="stat-desc">Trong lộ trình dài hạn</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">Trụ cột năng lực</div>
+            <div class="stat-value" id="stat-capabilities">0</div>
+            <div class="stat-desc">Kỹ năng cốt lõi</div>
+          </div>
+        </div>
 
-    <section class="dashboard-section" id="capabilities" aria-labelledby="capabilities-title"><div class="section-heading"><div><span class="section-index">04 / CAPABILITY SYSTEM</span><h2 id="capabilities-title">Hệ năng lực hỗ trợ mục tiêu</h2></div><p>Kỹ thuật mạnh chỉ phát huy tối đa khi đi cùng giao tiếp, tiếng Anh và tư duy hệ thống.</p></div><div class="capability-grid">
-      <article class="capability-panel skill-panel"><div class="panel-heading"><div><span>SKILL MATRIX</span><h3>Radar năng lực hiện tại</h3></div><span class="panel-badge">Q3 / 2026</span></div><div class="radar-layout"><svg class="skill-radar" viewBox="0 0 260 240" role="img" aria-label="Biểu đồ năng lực"><g class="radar-grid"><polygon points="130,22 224,76 224,164 130,218 36,164 36,76"/><polygon points="130,55 191,90 191,150 130,185 69,150 69,90"/><polygon points="130,88 159,105 159,135 130,152 101,135 101,105"/><line x1="130" y1="22" x2="130" y2="218"/><line x1="36" y1="76" x2="224" y2="164"/><line x1="224" y1="76" x2="36" y2="164"/></g><polygon class="radar-value" points="130,43 207,85 187,146 130,174 72,153 57,88"/><g class="radar-points"><circle cx="130" cy="43" r="4"/><circle cx="207" cy="85" r="4"/><circle cx="187" cy="146" r="4"/><circle cx="130" cy="174" r="4"/><circle cx="72" cy="153" r="4"/><circle cx="57" cy="88" r="4"/></g></svg><ul class="skill-legend"><li><span>Backend engineering</span><strong>82%</strong></li><li><span>Cloud foundation</span><strong>66%</strong></li><li><span>System design</span><strong>61%</strong></li><li><span>Communication</span><strong>57%</strong></li><li><span>English</span><strong>48%</strong></li><li><span>Delivery</span><strong>74%</strong></li></ul></div></article>
-      <article class="capability-panel"><div class="panel-heading"><div><span>NEXT 90 DAYS</span><h3>Ưu tiên thực thi</h3></div><i class="fa-solid fa-arrow-trend-up"></i></div><ol class="focus-list"><li><span>01</span><div><strong>System Design Journal</strong><p>Viết 3 ADR và 2 sơ đồ C4 cho các dự án đang chạy.</p></div></li><li><span>02</span><div><strong>Cloud delivery</strong><p>Đóng gói Docker, CI/CD và quan sát health metrics.</p></div></li><li><span>03</span><div><strong>English presentation</strong><p>Thực hiện 4 buổi trình bày kiến trúc bằng tiếng Anh.</p></div></li></ol></article>
-      <article class="capability-panel"><div class="panel-heading"><div><span>COMMUNICATION LOG</span><h3>English &amp; Soft Skills</h3></div><span class="panel-badge success">ON TRACK</span></div><div class="communication-score"><strong>142</strong><span>phút thuyết trình<br>trong tháng</span></div><div class="session-list"><div><span><i class="fa-solid fa-microphone-lines"></i>Designing Resilient APIs</span><time>38 phút</time></div><div><span><i class="fa-solid fa-users"></i>Architecture Review</span><time>45 phút</time></div><div><span><i class="fa-solid fa-language"></i>English Tech Talk</span><time>59 phút</time></div></div></article>
-    </div></section>
-    <aside class="principle-banner reveal"><span>OPERATING PRINCIPLE</span><blockquote>“Tiến bộ không đến từ một kế hoạch hoàn hảo, mà từ một hệ thống đủ rõ để hành động mỗi ngày.”</blockquote><cite>Hoàng Mạnh Trường</cite></aside>
-  </main>
-  <footer class="tutor-footer" data-shared-footer><div class="footer-content"><p>&copy; 2026 Hoàng Mạnh Trường. Từng ngày một, tiến về phía trước.</p><div class="footer-social"><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a><a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a></div></div></footer>
-  <script src="../assets/js/common.js"></script><script src="../assets/js/api-client.js"></script><script src="../assets/js/goals-page.js"></script>
-</body></html>
+        <div class="stage-card reveal" style="transition-delay: 0.2s">
+          <div class="stage-header">
+            <h3>Giai đoạn hiện tại: Build & Validate</h3>
+            <span class="mono">Backend · Cloud · Giao tiếp</span>
+          </div>
+          <div class="stage-progress">
+            <div class="progress-bar"><div class="progress-fill" style="width: 0%" id="stage-progress-fill"></div></div>
+          </div>
+          <p class="stage-next">Việc tiếp theo: Đóng gói Docker, thiết lập CI/CD và viết bài chia sẻ kiến trúc.</p>
+        </div>
+      </section>
+
+      <!-- 2. MỤC TIÊU -->
+      <section id="muc-tieu" class="sa-section">
+        <div class="section-header reveal">
+          <h2>Mục tiêu</h2>
+          <div class="mobile-filters" id="mobile-filters">
+            <!-- Rendered by JS -->
+          </div>
+          <div class="controls">
+             <select id="goal-sort">
+               <option value="progress">Tiến độ ↓</option>
+               <option value="deadline">Hạn gần nhất</option>
+               <option value="group">Nhóm</option>
+             </select>
+          </div>
+        </div>
+        
+        <div id="goals-container" class="goals-container">
+           <!-- Rendered by JS -->
+        </div>
+      </section>
+
+      <!-- 3. LỘ TRÌNH -->
+      <section id="lo-trinh" class="sa-section">
+        <div class="section-header reveal">
+          <h2>Lộ trình</h2>
+          <p>Hành trình từ nền tảng lập trình đến tư duy thiết kế hệ thống.</p>
+        </div>
+        <div class="roadmap-container reveal" id="roadmap-container">
+          <!-- Rendered by JS -->
+        </div>
+        
+        <h3 class="subsection-title reveal">Chủ đề kỹ thuật</h3>
+        <div class="topics-grid reveal" id="topics-grid">
+           <!-- Rendered by JS -->
+        </div>
+      </section>
+
+      <!-- 4. NĂNG LỰC -->
+      <section id="nang-luc" class="sa-section">
+        <div class="section-header reveal">
+          <h2>Năng lực</h2>
+          <p>Hệ thống kỹ năng hỗ trợ mục tiêu dài hạn.</p>
+        </div>
+        
+        <div class="capabilities-grid">
+          <div class="cap-card reveal">
+            <h3>Radar năng lực</h3>
+            <div class="radar-container">
+              <svg viewBox="0 0 200 200" id="radar-chart"></svg>
+              <div class="radar-legend" id="radar-legend"></div>
+            </div>
+            <p class="cap-note" title="Tự đánh giá qua các dự án cá nhân và công việc thực tế"><i class="fa-solid fa-circle-info"></i> Tự đánh giá theo tiêu chí: mức độ ứng dụng thực tế.</p>
+          </div>
+          
+          <div class="cap-right-col">
+            <div class="cap-card reveal" style="transition-delay: 0.1s">
+              <h3>90 ngày tới</h3>
+              <ul class="priority-list">
+                <li>
+                  <input type="checkbox" checked disabled>
+                  <div>
+                    <strong>System Design Journal</strong>
+                    <span>Viết 3 ADR và 2 sơ đồ C4. [CẦN ĐIỀN: Hạn]</span>
+                  </div>
+                </li>
+                <li>
+                  <input type="checkbox" disabled>
+                  <div>
+                    <strong>Cloud delivery</strong>
+                    <span>Docker, CI/CD, monitoring metrics.</span>
+                  </div>
+                </li>
+                <li>
+                  <input type="checkbox" disabled>
+                  <div>
+                    <strong>English presentation</strong>
+                    <span>4 buổi trình bày kiến trúc bằng tiếng Anh.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="cap-card reveal" style="transition-delay: 0.2s">
+              <div class="comm-header">
+                <h3>Nhật ký giao tiếp</h3>
+                <span class="status-badge st-hoan-thanh">ON TRACK</span>
+              </div>
+              <div class="comm-stats">
+                <div class="comm-number mono" id="comm-minutes">0</div>
+                <span>phút thuyết trình<br>trong tháng</span>
+              </div>
+              <ul class="comm-list" id="comm-list">
+                 <!-- Rendered by JS -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUOTE & FOOTER -->
+      <div class="sa-footer-area">
+        <blockquote class="sa-quote reveal">
+          <div class="quote-label mono">Nguyên tắc làm việc</div>
+          <p>"Tiến bộ không đến từ một kế hoạch hoàn hảo, mà từ một hệ thống đủ rõ để hành động mỗi ngày."</p>
+          <cite>Hoàng Mạnh Trường</cite>
+        </blockquote>
+
+        <footer class="sa-footer reveal">
+          <div class="footer-links">
+            <a href="mailto:truongcri0101@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+            <a href="#"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+          </div>
+          <div class="footer-copy">
+            &copy; 2026 Hoàng Mạnh Trường. Từng ngày một, tiến về phía trước.
+          </div>
+        </footer>
+      </div>
+    </main>
+    
+    <a href="#chat" class="fab-chat"><i class="fa-solid fa-comment-dots"></i></a>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/goals-data.js"></script>
+  <script src="../assets/js/goals-page.js"></script>
+</body>
+</html>

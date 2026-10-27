@@ -54,7 +54,7 @@ public class TutorClassController {
                 cls.setCompleted(cls.getCompleted() + 1);
                 // Tự động đánh dấu done khi hoàn thành lộ trình
                 if (cls.getCompleted() >= cls.getTotal()) {
-                    cls.setStatus("done");
+                    cls.setStatus(com.love.portfolio.model.ClassStatus.done);
                 }
             }
             return ResponseEntity.ok(repo.save(cls));

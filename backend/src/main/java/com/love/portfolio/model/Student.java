@@ -25,6 +25,6 @@ public class Student {
     private Integer quizCount = 0;
     private Integer studentRank;
 
-    @Column(columnDefinition = "TEXT")
-    private String quizHistory; // Store as JSON string for simplicity
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private java.util.List<QuizHistory> quizHistories = new java.util.ArrayList<>();
 }

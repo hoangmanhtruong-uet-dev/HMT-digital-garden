@@ -71,18 +71,23 @@
 
 /* Global Navbar Styling */
 .navbar-unified {
+    z-index: 50 !important;
+    background: rgba(0,0,0,0.8) !important;
+    backdrop-filter: blur(12px) !important;
     position: fixed;
     top: 20px;
     left: 50%;
-    transform: translateX(-50%);
-    width: 95%;
-    max-width: 1400px;
-    background: rgba(15, 23, 42, 0.6);
+    transform: translateX(-50%) translateY(-100px);
+    width: max-content;
+    min-width: min(700px, 95vw);
+    max-width: 95%;
+    gap: 3rem;
+    background: rgba(15, 23, 42, 0.65);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 100px;
-    padding: 0.6rem 2rem;
+    padding: 0.5rem 1.5rem;
     z-index: 10000;
     display: flex;
     justify-content: space-between;
@@ -90,13 +95,17 @@
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
                 inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    animation: navDrop 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+}
+
+@keyframes navDrop {
+    to { transform: translateX(-50%) translateY(0); }
 }
 
 .navbar-unified.scrolled {
-    top: 0;
-    width: 100%;
-    border-radius: 0;
-    padding: 0.6rem 2rem;
+    top: 15px;
+    background: rgba(15, 23, 42, 0.95);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .nav-logo {
@@ -431,3 +440,39 @@
 .modal-overlay#admin-modal {
     display: none !important;
 }
+
+/* Theme Toggle Button Styles */
+#theme-toggle-button {
+  font-size: 8px; /* Scaled down to fit navbar seamlessly */
+  position: relative;
+  display: inline-block;
+  width: 7em;
+  cursor: pointer;
+  margin: 0;
+}
+#theme-toggle-button svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+#toggle {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+#container, #patches, #stars, #button, #sun, #moon, #cloud {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.25s;
+}
+#toggle:checked + svg #container { fill: #2b4360; }
+#toggle:checked + svg #button { transform: translate(28px, 2.333px); }
+#sun { opacity: 1; }
+#toggle:checked + svg #sun { opacity: 0; }
+#moon { opacity: 0; }
+#toggle:checked + svg #moon { opacity: 1; }
+#cloud { opacity: 1; }
+#toggle:checked + svg #cloud { opacity: 0; }
+#stars { opacity: 0; }
+#toggle:checked + svg #stars { opacity: 1; }

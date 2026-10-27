@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import com.love.portfolio.config.PublicEndpoint;
 
 @RestController
 @RequestMapping("/api/goals")
@@ -18,6 +19,7 @@ public class GoalProgressController {
 
     // GET toàn bộ tiến độ (trả về map goalId -> data)
     @GetMapping
+    @PublicEndpoint
     public List<GoalProgress> getAll() {
         return repo.findAll();
     }

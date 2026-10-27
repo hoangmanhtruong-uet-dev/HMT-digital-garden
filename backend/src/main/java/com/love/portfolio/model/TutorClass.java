@@ -27,11 +27,13 @@ public class TutorClass {
     private String schedule;
     private int total;
     private int completed;
-    private String status;          // active | pending | done
+    @Enumerated(EnumType.STRING)
+    private ClassStatus status;          // active | pending | done
 
     // ── Học phí ──
     private Long price;
-    private String payment;         // monthly | per-session | full
+    @Enumerated(EnumType.STRING)
+    private PaymentType payment;         // monthly | per-session | full
     private Long received;
 
     // ── Tuỳ chỉnh ──

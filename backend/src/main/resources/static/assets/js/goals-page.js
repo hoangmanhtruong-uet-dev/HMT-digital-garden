@@ -1,18 +1,288 @@
-const goalsData=[
-{id:1,category:'hoc-tap',icon:'fa-graduation-cap',iconColor:'purple',title:'Tốt nghiệp UET loại Xuất Sắc',deadline:'Mục tiêu: 2027',desc:'Duy trì GPA ≥ 3.2/4.0 trong suốt quá trình học tại Đại học Công nghệ – ĐHQGHN.',progress:45,status:'inprogress'},
-{id:2,category:'ky-nang',icon:'fa-code',iconColor:'blue',title:'Thành thạo Spring Boot & Microservices',deadline:'Mục tiêu: Q4/2025',desc:'Xây dựng ít nhất 2 dự án microservices hoàn chỉnh với Docker, Kubernetes và CI/CD pipeline.',progress:60,status:'inprogress'},
-{id:3,category:'su-nghiep',icon:'fa-briefcase',iconColor:'orange',title:'Tìm được vị trí thực tập Java Backend',deadline:'Mục tiêu: Hè 2025',desc:'Ứng tuyển và được nhận vào thực tập tại một công ty công nghệ uy tín tại Hà Nội.',progress:30,status:'inprogress'},
-{id:4,category:'ky-nang',icon:'fa-certificate',iconColor:'green',title:'Đạt chứng chỉ IELTS 6.5+',deadline:'Mục tiêu: 2026',desc:'Nâng cao kỹ năng tiếng Anh để đọc tài liệu kỹ thuật và giao tiếp trong môi trường quốc tế.',progress:20,status:'inprogress'},
-{id:5,category:'hoc-tap',icon:'fa-robot',iconColor:'pink',title:'Hoàn thành khóa học Machine Learning',deadline:'Mục tiêu: Q2/2026',desc:'Hoàn thành khóa học ML trên Coursera (Andrew Ng) và áp dụng vào dự án thực tế.',progress:15,status:'planned'},
-{id:6,category:'su-nghiep',icon:'fa-star',iconColor:'cyan',title:'Đóng góp cho dự án Open Source',deadline:'Mục tiêu: 2025',desc:'Có ít nhất 5 pull request được merge vào các dự án open source trên GitHub.',progress:40,status:'inprogress'},
-{id:7,category:'cuoc-song',icon:'fa-dumbbell',iconColor:'orange',title:'Duy trì thói quen tập thể dục',deadline:'Mục tiêu: Hàng ngày',desc:'Tập thể dục ít nhất 30 phút mỗi ngày để duy trì sức khỏe và tinh thần minh mẫn.',progress:70,status:'inprogress'},
-{id:8,category:'hoc-tap',icon:'fa-book',iconColor:'blue',title:'Đọc 12 cuốn sách mỗi năm',deadline:'Mục tiêu: Hàng năm',desc:'Đọc ít nhất 1 cuốn sách mỗi tháng — kết hợp sách kỹ thuật và sách phát triển bản thân.',progress:58,status:'inprogress'},
-{id:9,category:'cuoc-song',icon:'fa-heart',iconColor:'pink',title:'Xây dựng website tình yêu hoàn chỉnh',deadline:'Hoàn thành: 2025',desc:'Tạo một website kỷ niệm tình yêu với đầy đủ tính năng: locket, bản đồ, timeline, nhạc.',progress:100,status:'done'}];
-let currentFilter='all';const GOAL_API=`${API_CONFIG.BASE_URL}/api/goals`;
-function statusMeta(status){if(status==='done')return{className:'badge-done',icon:'fa-circle-check',label:'Hoàn thành'};if(status==='planned')return{className:'badge-planned',icon:'fa-clock',label:'Kế hoạch'};return{className:'badge-inprogress',icon:'fa-arrows-rotate',label:'Đang thực hiện'}}
-function renderOverview(){const root=document.getElementById('progress-overview');if(!root)return;const average=Math.round(goalsData.reduce((sum,g)=>sum+Number(g.progress||0),0)/goalsData.length);const metrics=[{icon:'fa-chart-simple',value:`${average}%`,label:'Tiến độ trung bình',note:'Toàn bộ mục tiêu'},{icon:'fa-bolt',value:goalsData.filter(g=>g.status==='inprogress').length,label:'Mục tiêu đang chạy',note:'Active objectives'},{icon:'fa-circle-check',value:goalsData.filter(g=>g.status==='done').length,label:'Cột mốc hoàn thành',note:'Verified milestones'},{icon:'fa-layer-group',value:new Set(goalsData.map(g=>g.category)).size,label:'Trụ cột phát triển',note:'Capability domains'}];root.innerHTML=metrics.map(m=>`<article class="stat-card"><div class="stat-card-top"><span>${m.note}</span><span class="stat-icon"><i class="fa-solid ${m.icon}"></i></span></div><div class="stat-number">${m.value}</div><div class="stat-label">${m.label}</div></article>`).join('');document.getElementById('overall-progress-orbit')?.style.setProperty('--overall',`${average*3.6}deg`);const value=document.getElementById('overall-progress');if(value)value.textContent=`${average}%`}
-function renderGoals(filter='all'){const root=document.getElementById('goals-grid');if(!root)return;const filtered=filter==='all'?goalsData:goalsData.filter(g=>g.category===filter);root.innerHTML=filtered.map((g,index)=>{const state=statusMeta(g.status);const dates=(g.startDate||g.endDate)?`<div class="goal-dates">${g.startDate?`<span><i class="fa-solid fa-play"></i> ${g.startDate}</span>`:''}${g.endDate?`<span><i class="fa-solid fa-flag-checkered"></i> ${g.endDate}</span>`:''}</div>`:'';return`<article class="goal-card ${g.status==='done'?'done':''}" data-sequence="${String(index+1).padStart(2,'0')}"><div class="goal-card-header"><div class="goal-icon-wrap ${g.iconColor}"><i class="fa-solid ${g.icon}"></i></div><div><h3 class="goal-card-title">${g.title}</h3><div class="goal-card-deadline"><i class="fa-regular fa-calendar"></i> ${g.deadline}</div></div></div><p class="goal-card-desc">${g.desc}</p><div class="progress-bar-wrap"><div class="progress-bar-label"><span>Tiến độ thực thi</span><strong>${g.progress}%</strong></div><div class="progress-bar-track" role="progressbar" aria-label="Tiến độ ${g.title}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${g.progress}"><div class="progress-bar-fill ${g.status==='done'?'green':''}" style="width:${Math.min(100,Math.max(0,g.progress))}%"></div></div>${dates}</div><span class="goal-status-badge ${state.className}"><i class="fa-solid ${state.icon}"></i>${state.label}</span></article>`}).join('')}
-async function loadGoalProgress(){try{const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),5000);const response=await fetch(GOAL_API,{signal:controller.signal});clearTimeout(timer);if(!response.ok)return;const saved=await response.json();let changed=false;saved.forEach(item=>{const goal=goalsData.find(g=>g.id===item.goalId);if(!goal)return;goal.progress=Number.isFinite(Number(item.progress))?Number(item.progress):goal.progress;goal.status=item.status||goal.status;goal.startDate=item.startDate||'';goal.endDate=item.endDate||'';changed=true});if(changed){renderGoals(currentFilter);renderOverview()}}catch(error){if(error.name!=='AbortError')console.warn('Không tải được tiến độ từ DB:',error.message)}}
-document.querySelectorAll('.goal-tab').forEach(tab=>tab.addEventListener('click',()=>{document.querySelectorAll('.goal-tab').forEach(item=>{item.classList.remove('active');item.setAttribute('aria-selected','false')});tab.classList.add('active');tab.setAttribute('aria-selected','true');currentFilter=tab.dataset.tab;renderGoals(currentFilter)}));
-const sections=[...document.querySelectorAll('.dashboard-section')],railLinks=[...document.querySelectorAll('.section-rail a')];if('IntersectionObserver'in window&&sections.length){const observer=new IntersectionObserver(entries=>{const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(visible)railLinks.forEach(link=>link.classList.toggle('active',link.getAttribute('href')===`#${visible.target.id}`))},{rootMargin:'-25% 0px -60% 0px',threshold:[0,.2,.5]});sections.forEach(section=>observer.observe(section))}
-renderGoals();renderOverview();loadGoalProgress();
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Render Dữ liệu
+    const renderData = () => {
+        // Hero
+        document.getElementById('hero-date').textContent = "cập nhật " + SA_DATA.overview.lastUpdated;
+        document.getElementById('sb-last-update').textContent = "Cập nhật: " + SA_DATA.overview.lastUpdated;
+
+        // Stats
+        const totalGoals = SA_DATA.goals.length;
+        const activeGoals = SA_DATA.goals.filter(g => g.status === 'dang-thuc-hien').length;
+        const completedGoals = SA_DATA.goals.filter(g => g.status === 'hoan-thanh').length;
+        const avgProgress = Math.round(SA_DATA.goals.reduce((acc, g) => acc + g.progress, 0) / totalGoals);
+        const milestones = SA_DATA.roadmap.filter(r => r.status === 'hoan-thanh').length;
+        const capabilities = SA_DATA.capabilities.radar.length;
+
+        document.getElementById('stat-avg').textContent = avgProgress + '%';
+        document.getElementById('stat-active-goals').textContent = activeGoals + '/' + totalGoals;
+        document.getElementById('stat-milestones').textContent = milestones;
+        document.getElementById('stat-capabilities').textContent = capabilities;
+        
+        // Sidebar counts
+        document.getElementById('sb-goals-count').textContent = totalGoals;
+        document.getElementById('sb-roadmap-count').textContent = SA_DATA.roadmap.length;
+        document.getElementById('sb-cap-count').textContent = capabilities;
+        
+        // Sidebar ring
+        const ringFill = document.getElementById('sb-ring');
+        setTimeout(() => {
+            ringFill.style.strokeDasharray = avgProgress + ', 100';
+            document.getElementById('sb-progress-text').textContent = avgProgress + '%';
+        }, 300);
+
+        // Stage progress (just visual approx based on milestones)
+        const stageFill = document.getElementById('stage-progress-fill');
+        setTimeout(() => { stageFill.style.width = '60%'; }, 500);
+
+        // Render Goals
+        renderGoals(SA_DATA.goals);
+
+        // Render Roadmap
+        const rmContainer = document.getElementById('roadmap-container');
+        rmContainer.innerHTML = SA_DATA.roadmap.map((r, i) => `
+            <article class="roadmap-item ${r.status}">
+                <div class="rm-dot"></div>
+                <div class="rm-content">
+                    <span class="rm-year">${r.year}</span>
+                    <h3>${r.title}</h3>
+                    <p>${r.description}</p>
+                    <span class="status-badge st-${r.status}">${getStatusText(r.status)}</span>
+                </div>
+            </article>
+        `).join('');
+
+        // Render Topics
+        const topicsGrid = document.getElementById('topics-grid');
+        topicsGrid.innerHTML = SA_DATA.topics.map(t => `
+            <div class="topic-card ${t.status} reveal">
+                <div class="topic-header">
+                    <span class="topic-label">${t.title}</span>
+                    <span class="status-badge st-${t.status}">${getStatusText(t.status)}</span>
+                </div>
+                <h4>${t.name}</h4>
+                <p>${t.desc}</p>
+                <div class="topic-progress-bg">
+                    <div class="topic-progress-fill" style="width: 0" data-width="${t.progress}%"></div>
+                </div>
+            </div>
+        `).join('');
+
+        // Radar Chart (Simple SVG generation)
+        renderRadar(SA_DATA.capabilities.radar);
+
+        // Comm logs
+        document.getElementById('comm-minutes').textContent = SA_DATA.capabilities.communication.minutes;
+        document.getElementById('comm-list').innerHTML = SA_DATA.capabilities.communication.sessions.map(s => `
+            <li>
+                <div style="display:flex; gap:12px; align-items:center;">
+                    <i class="fa-solid ${s.icon}"></i>
+                    <span>${s.name}</span>
+                </div>
+                <span class="time">${s.duration} phút</span>
+            </li>
+        `).join('');
+    };
+
+    const getStatusText = (status) => {
+        const map = { 'hoan-thanh': 'Hoàn thành', 'dang-thuc-hien': 'Đang thực hiện', 'ke-hoach': 'Kế hoạch', 'qua-han': 'Quá hạn · Cần chú ý' };
+        return map[status] || status;
+    };
+
+    const getIcon = (cat) => {
+        const map = { 'hoc-tap': 'fa-book-open', 'ky-nang': 'fa-code', 'su-nghiep': 'fa-briefcase', 'cuoc-song': 'fa-heart' };
+        return map[cat] || 'fa-star';
+    };
+
+    const renderGoals = (goals) => {
+        const container = document.getElementById('goals-container');
+        container.innerHTML = goals.map(g => {
+            // Auto check overdue
+            let status = g.status;
+            if (new Date(g.deadline) < new Date() && status !== 'hoan-thanh') {
+                status = 'qua-han';
+            }
+            return `
+            <article class="goal-card ${status} reveal">
+                <div class="goal-header">
+                    <div class="goal-icon"><i class="fa-solid ${getIcon(g.category)}"></i></div>
+                    <h3 class="goal-title">${g.title}</h3>
+                </div>
+                <p class="goal-desc">${g.description}</p>
+                <div class="goal-meta">
+                    <span class="status-badge st-${status}">${getStatusText(status)}</span>
+                    <span class="goal-deadline">${g.deadline}</span>
+                </div>
+                <div class="goal-progress-bar">
+                    <div class="goal-progress-fill" style="width: 0" data-width="${g.progress}%"></div>
+                </div>
+                <div class="goal-progress-text">${g.progress}%</div>
+            </article>
+        `}).join('');
+        
+        // Trigger progress animation after slight delay
+        setTimeout(() => {
+            document.querySelectorAll('.goal-progress-fill, .topic-progress-fill').forEach(el => {
+                el.style.width = el.getAttribute('data-width');
+            });
+        }, 100);
+    };
+
+    const renderRadar = (data) => {
+        const svg = document.getElementById('radar-chart');
+        const legend = document.getElementById('radar-legend');
+        const cx = 100, cy = 100, r = 80;
+        const max = Math.PI * 2;
+        const len = data.length;
+        
+        // Draw grid
+        for(let j=1; j<=4; j++){
+            let points = "";
+            for(let i=0; i<len; i++){
+                const angle = (Math.PI / 2) - (max * i / len);
+                const x = cx + Math.cos(angle) * (r * j / 4);
+                const y = cy - Math.sin(angle) * (r * j / 4);
+                points += `${x},${y} `;
+            }
+            svg.innerHTML += `<polygon points="${points}" fill="none" stroke="rgba(255,255,255,0.08)" />`;
+        }
+        // Draw axes
+        for(let i=0; i<len; i++){
+            const angle = (Math.PI / 2) - (max * i / len);
+            const x = cx + Math.cos(angle) * r;
+            const y = cy - Math.sin(angle) * r;
+            svg.innerHTML += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(255,255,255,0.08)" />`;
+        }
+        
+        // Draw data polygon
+        let dataPoints = "";
+        let circles = "";
+        data.forEach((d, i) => {
+            const angle = (Math.PI / 2) - (max * i / len);
+            const valR = r * (d.value / 100);
+            const x = cx + Math.cos(angle) * valR;
+            const y = cy - Math.sin(angle) * valR;
+            dataPoints += `${x},${y} `;
+            circles += `<circle cx="${x}" cy="${y}" r="3" fill="#5B8CFF" />`;
+        });
+        
+        svg.innerHTML += `<polygon points="${dataPoints}" fill="rgba(91,140,255,0.2)" stroke="#5B8CFF" stroke-width="2" />`;
+        svg.innerHTML += circles;
+
+        // Legend
+        legend.innerHTML = data.map(d => `
+            <div class="legend-item">
+                <span>${d.name}</span>
+                <span class="legend-val">${d.value}%</span>
+            </div>
+        `).join('');
+    };
+
+    renderData();
+
+    // 2. Scroll Spy & Intersection Observer
+    const sections = document.querySelectorAll('.sa-section');
+    const navItems = document.querySelectorAll('.sidebar-nav .nav-item, .mobile-bottom-bar .nav-item');
+    const navIndicator = document.getElementById('nav-indicator');
+
+    const updateActiveNav = (id) => {
+        navItems.forEach(item => {
+            item.classList.remove('is-active');
+            item.setAttribute('aria-current', 'false');
+            if (item.getAttribute('data-target') === id) {
+                item.classList.add('is-active');
+                item.setAttribute('aria-current', 'true');
+                if (navIndicator && item.closest('.sidebar-nav')) {
+                    navIndicator.style.transform = `translateY(${item.offsetTop - 16}px)`;
+                }
+            }
+        });
+        if(history.replaceState) {
+            history.replaceState(null, null, '#' + id);
+        }
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        let maxVisible = null;
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (!maxVisible || entry.intersectionRatio > maxVisible.intersectionRatio) {
+                    maxVisible = entry;
+                }
+            }
+        });
+        if (maxVisible) {
+            updateActiveNav(maxVisible.target.id);
+        }
+    }, { rootMargin: '-100px 0px -40% 0px', threshold: [0, 0.2, 0.5, 0.8] });
+
+    sections.forEach(sec => observer.observe(sec));
+
+    // Keyboard shortcuts 1-4
+    document.addEventListener('keydown', (e) => {
+        if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        const map = { '1': 'tong-quan', '2': 'muc-tieu', '3': 'lo-trinh', '4': 'nang-luc' };
+        if (map[e.key]) {
+            const target = document.getElementById(map[e.key]);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+
+    // 3. Filters & Sorting
+    const initFilters = () => {
+        const filterBtns = document.querySelectorAll('.nav-filter, .mobile-filters button');
+        // clone sidebar filters to mobile
+        const mobileFilters = document.getElementById('mobile-filters');
+        if(mobileFilters && mobileFilters.innerHTML.trim() === "") {
+            mobileFilters.innerHTML = document.querySelector('.nav-sub-items').innerHTML;
+        }
+
+        document.querySelectorAll('.nav-filter, .mobile-filters button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const cat = e.target.getAttribute('data-filter');
+                document.querySelectorAll('.nav-filter, .mobile-filters button').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll(`[data-filter="${cat}"]`).forEach(b => b.classList.add('active'));
+                
+                let filtered = SA_DATA.goals;
+                if (cat !== 'all') {
+                    filtered = SA_DATA.goals.filter(g => g.category === cat);
+                }
+                
+                // Keep sort
+                const sortVal = document.getElementById('goal-sort').value;
+                sortGoals(filtered, sortVal);
+                
+                // Scroll to goals section smoothly
+                document.getElementById('muc-tieu').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        document.getElementById('goal-sort').addEventListener('change', (e) => {
+            const activeCat = document.querySelector('.nav-filter.active').getAttribute('data-filter');
+            let filtered = SA_DATA.goals;
+            if (activeCat !== 'all') filtered = SA_DATA.goals.filter(g => g.category === activeCat);
+            sortGoals(filtered, e.target.value);
+        });
+    };
+
+    const sortGoals = (goals, sortType) => {
+        const sorted = [...goals];
+        if (sortType === 'progress') sorted.sort((a,b) => b.progress - a.progress);
+        else if (sortType === 'deadline') sorted.sort((a,b) => new Date(a.deadline) - new Date(b.deadline));
+        else if (sortType === 'group') sorted.sort((a,b) => a.category.localeCompare(b.category));
+        renderGoals(sorted);
+    };
+    initFilters();
+
+    // 4. Reveal Animation
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: '0px 0px -50px 0px' });
+    revealElements.forEach(el => revealObserver.observe(el));
+});

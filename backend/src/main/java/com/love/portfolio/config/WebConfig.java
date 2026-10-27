@@ -9,9 +9,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
     private final AdminAuthInterceptor adminAuthInterceptor;
+    private final String[] allowedOrigins;
 
-    public WebConfig(AdminAuthInterceptor adminAuthInterceptor) {
+    public WebConfig(AdminAuthInterceptor adminAuthInterceptor,
+                     @org.springframework.beans.factory.annotation.Value("${allowed.origins:*}") String allowedOriginsRaw) {
         this.adminAuthInterceptor = adminAuthInterceptor;
+        this.allowedOrigins = java.util.Arrays.stream(allowedOriginsRaw.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .toArray(String[]::new);
     }
 
     // Resource handler /uploads/** đã được xóa — ảnh giờ lưu trên Cloudinary,
@@ -19,14 +25,16 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        // Origin bị giới hạn bởi biến môi trường ALLOWED_ORIGINS (mặc định "*" chỉ cho dev).
+        // Ở production đặt ví dụ: ALLOWED_ORIGINS=https://example.com,https://www.example.com
         registry.addMapping("/api/**")
-                .allowedOriginPatterns("*")
+                .allowedOriginPatterns(allowedOrigins)
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .exposedHeaders("Access-Control-Allow-Origin");
         // WebSocket endpoint cần CORS riêng
         registry.addMapping("/ws-location/**")
-                .allowedOriginPatterns("*")
+                .allowedOriginPatterns(allowedOrigins)
                 .allowedMethods("GET", "POST", "OPTIONS")
                 .allowedHeaders("*");
     }

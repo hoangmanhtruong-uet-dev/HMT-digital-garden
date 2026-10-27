@@ -12,9 +12,12 @@ backend/target/
 mvnw
 mvnw.cmd
 
-# IDEs
+# IDEs & Agents
 .vscode/
 .idea/
+.kilo/
+.agents/
+.antigravityrules*
 *.swp
 *.swo
 *.DS_Store

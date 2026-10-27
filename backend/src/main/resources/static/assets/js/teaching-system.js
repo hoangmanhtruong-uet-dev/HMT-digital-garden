@@ -1,7 +1,23 @@
 (() => {
     'use strict';
 
-    const header = document.querySelector('[data-header]');
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('toggle');
+    if (themeToggle) {
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            themeToggle.checked = currentTheme === 'dark';
+        }
+        
+        themeToggle.addEventListener('change', function(e) {
+            const theme = e.target.checked ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        });
+    }
+
+    const header = document.querySelector('[data-header]') || document.querySelector('.site-header');
     const menuToggle = document.querySelector('[data-menu-toggle]');
     const mobileNav = document.querySelector('[data-mobile-nav]');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -132,33 +148,52 @@
         });
     });
 
-    form?.addEventListener('submit', (event) => {
+    form?.addEventListener('submit', async (event) => {
         event.preventDefault();
         const requiredFields = [...form.querySelectorAll('input[required], select[required]')];
         const valid = requiredFields.map(validateField).every(Boolean);
         if (!valid) {
             formStatus.textContent = 'Bạn kiểm tra lại các trường được đánh dấu nhé.';
+            formStatus.className = 'form-status error';
             form.querySelector('.is-invalid')?.focus();
             return;
         }
 
         const data = new FormData(form);
-        const subject = `Đăng ký tư vấn học tập - ${data.get('name')}`;
-        const body = [
-            'Chào thầy Mạnh Trường,',
-            '',
-            `Họ và tên: ${data.get('name')}`,
-            `Số điện thoại: ${data.get('phone')}`,
-            `Lớp / Trình độ: ${data.get('grade')}`,
-            `Môn học: ${data.get('subject')}`,
-            `Hình thức: ${data.get('format')}`,
-            `Nội dung quan tâm: ${data.get('interest')}`,
-            `Ghi chú: ${data.get('notes') || 'Không có'}`,
-            '',
-            'Mong được tư vấn lộ trình phù hợp.'
-        ].join('\n');
+        const payload = {
+            name: data.get('name'),
+            phone: data.get('phone'),
+            grade: data.get('grade'),
+            subject: data.get('subject'),
+            format: data.get('format'),
+            interest: data.get('interest'),
+            notes: data.get('notes') || ''
+        };
 
-        formStatus.textContent = 'Đang mở ứng dụng email để bạn kiểm tra và gửi đăng ký…';
-        window.location.href = `mailto:truongcri0101@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const formLoading = document.querySelector('[data-form-loading]');
+        formLoading?.classList.add('is-active');
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+
+        try {
+            const response = await fetch('/api/contact/enroll', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                formStatus.textContent = 'Đăng ký thành công! Mình sẽ liên hệ với bạn trong thời gian sớm nhất.';
+                formStatus.className = 'form-status success';
+                form.reset();
+            } else {
+                throw new Error('Server error');
+            }
+        } catch (error) {
+            formStatus.textContent = 'Có lỗi xảy ra khi gửi đăng ký. Vui lòng thử lại sau.';
+            formStatus.className = 'form-status error';
+        } finally {
+            formLoading?.classList.remove('is-active');
+        }
     });
 })();

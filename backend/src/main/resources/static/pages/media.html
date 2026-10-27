@@ -105,7 +105,6 @@
         <i class="fa-solid fa-moon" id="dark-mode-icon"></i>
     </div>
 
-    <div class="music-player"></div>
 
     <div class="back-nav">
         <a href="love.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Quay lại trang chủ</a>
@@ -161,7 +160,6 @@
         </div>
     </div>
 
-    <script src="../assets/js/music.js"></script>
     <script>
         let mediaData = JSON.parse(localStorage.getItem('loveMediaList')) || [
             { url: "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&w=800&q=80", tag: "Kỷ niệm", isSlideshow: true },
@@ -236,11 +234,6 @@
             icon.className = document.body.classList.contains('light-mode') ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
         }
 
-        const audio = document.getElementById('bg-music');
-        function toggleMusic() {
-            if (audio.paused) { audio.play(); document.getElementById('play-pause').className = 'fa-solid fa-pause music-btn'; }
-            else { audio.pause(); document.getElementById('play-pause').className = 'fa-solid fa-play music-btn'; }
-        }
 
         window.onload = renderMedia;
     </script>

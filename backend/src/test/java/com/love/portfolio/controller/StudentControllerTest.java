@@ -29,21 +29,56 @@ class StudentControllerTest {
     }
 
     @Test
-    void legacyPasswordIsUpgradedDuringLogin() {
-        Student stored = student("manh", "legacy-pass");
+    void loginSucceedsWithBcryptPassword() {
+        Student stored = student("manh", encoder.encode("password123"));
         when(repository.findByUsername("manh")).thenReturn(Optional.of(stored));
-        when(repository.save(any(Student.class))).thenAnswer(invocation -> invocation.getArgument(0));
         MockHttpSession session = new MockHttpSession();
 
-        assertEquals(HttpStatus.OK, controller.login(student("manh", "legacy-pass"), session).getStatusCode());
+        assertEquals(HttpStatus.OK, controller.login(student("manh", "password123"), session).getStatusCode());
         assertEquals("manh", session.getAttribute("studentUsername"));
-        assertTrue(encoder.matches("legacy-pass", stored.getPassword()));
+    }
+
+    @Test
+    void loginRejectsNonBcryptLegacyPassword() {
+        // Mật khẩu plaintext (legacy) không còn được chấp nhận — phải đăng ký lại qua bcrypt.
+        Student stored = student("manh", "legacy-pass");
+        when(repository.findByUsername("manh")).thenReturn(Optional.of(stored));
+        MockHttpSession session = new MockHttpSession();
+
+        assertEquals(HttpStatus.UNAUTHORIZED, controller.login(student("manh", "legacy-pass"), session).getStatusCode());
     }
 
     @Test
     void profileRequiresMatchingStudentSession() {
         MockHttpSession session = new MockHttpSession();
         assertEquals(HttpStatus.UNAUTHORIZED, controller.getProfile("manh", session).getStatusCode());
+    }
+
+    @Test
+    void saveQuizUpdatesCountAvgAndQuizHistories() {
+        Student stored = student("manh", encoder.encode("password123"));
+        stored.setQuizCount(1);
+        stored.setAvgScore(8.0);
+        when(repository.findByUsername("manh")).thenReturn(Optional.of(stored));
+        when(repository.save(any(Student.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute("studentUsername", "manh");
+
+        StudentController.QuizResultRequest req = new StudentController.QuizResultRequest();
+        req.setUsername("manh");
+        req.setExamTitle("Đề thi Toán 10");
+        req.setScore(10.0);
+
+        var res = controller.saveQuiz(req, session);
+        assertEquals(HttpStatus.OK, res.getStatusCode());
+        Student updated = (Student) res.getBody();
+        assertNotNull(updated);
+        assertEquals(2, updated.getQuizCount());
+        assertEquals(9.0, updated.getAvgScore());
+        assertEquals(1, updated.getQuizHistories().size());
+        assertEquals("Đề thi Toán 10", updated.getQuizHistories().get(0).getExamTitle());
+        assertEquals(10.0, updated.getQuizHistories().get(0).getScore());
     }
 
     private Student student(String username, String password) {

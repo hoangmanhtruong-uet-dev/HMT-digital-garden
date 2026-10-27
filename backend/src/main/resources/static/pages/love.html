@@ -95,8 +95,6 @@
         </div>
     </header>
 
-    <div class="music-player" aria-label="Trình phát nhạc"></div>
-
     <main class="memory-shell">
         <section class="memory-hero" aria-labelledby="memory-title">
             <div class="memory-hero__intro">
@@ -230,6 +228,7 @@
         .settings-title span {
             background: linear-gradient(135deg, #ff6b8a, #c084fc);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -567,7 +566,6 @@
         }
     </script>
 
-    <script src="../assets/js/music.js"></script>
     <script>
         function toggleDarkMode() {
             document.body.classList.toggle('light-mode');

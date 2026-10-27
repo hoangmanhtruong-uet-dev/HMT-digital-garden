@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import com.love.portfolio.config.PublicEndpoint;
 
 @RestController
 @RequestMapping("/api/milestones")
@@ -23,6 +24,7 @@ public class MilestoneController {
     private CloudinaryService cloudinaryService;
 
     @GetMapping
+    @PublicEndpoint
     public List<Milestone> getAllMilestones() {
         return milestoneRepository.findAll();
     }

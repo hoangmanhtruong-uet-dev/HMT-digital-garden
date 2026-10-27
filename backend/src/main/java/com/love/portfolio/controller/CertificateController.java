@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import com.love.portfolio.config.PublicEndpoint;
 
 @RestController
 @RequestMapping("/api/certificates")
@@ -22,6 +23,7 @@ public class CertificateController {
     private CloudinaryService cloudinaryService;
 
     @GetMapping
+    @PublicEndpoint
     public List<Certificate> getAllCertificates() {
         return certificateRepository.findAll();
     }

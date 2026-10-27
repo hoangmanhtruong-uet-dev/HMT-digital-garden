@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import com.love.portfolio.config.PublicEndpoint;
 
 @RestController
 @RequestMapping("/api/settings")
@@ -21,6 +22,7 @@ public class SystemSettingController {
     private CloudinaryService cloudinaryService;
 
     @GetMapping("/{key}")
+    @PublicEndpoint
     public SystemSetting getSetting(@PathVariable String key) {
         return systemSettingRepository.findById(key)
                 .orElseGet(() -> {

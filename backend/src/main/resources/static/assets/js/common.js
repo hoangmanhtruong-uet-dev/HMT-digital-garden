@@ -1,5 +1,26 @@
 // Page Transition Injector
 document.addEventListener('DOMContentLoaded', () => {
+    // Add click interceptor for page transitions
+    document.querySelectorAll('a[href]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            // If it's a relative link (not starting with http, #, mailto, etc)
+            if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto:') && !link.hasAttribute('target')) {
+                e.preventDefault();
+                const loader = document.getElementById('page-loader');
+                if (loader) {
+                    loader.classList.remove('hidden');
+                    // Wait for transition to cover screen, then navigate
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 600);
+                } else {
+                    window.location.href = href;
+                }
+            }
+        });
+    });
+
     const loader = document.createElement('div');
     loader.className = 'page-transition';
     loader.id = 'page-loader';
@@ -73,28 +94,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    
+    
+    
     // 2. Premium Theme Switching Logic
-    const themeBtn = document.querySelector('.theme-toggle');
+    const themeCheckbox = document.getElementById('toggle');
+    const oldThemeBtn = document.querySelector('.theme-toggle'); // Fallback
     const currentTheme = localStorage.getItem('theme') || 'dark';
 
     document.documentElement.setAttribute('data-theme', currentTheme);
-    updateThemeIcon(currentTheme);
-
-    themeBtn?.addEventListener('click', () => {
-        let theme = document.documentElement.getAttribute('data-theme');
-        let newTheme = theme === 'dark' ? 'light' : 'dark';
-
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-    });
+    
+    if (themeCheckbox) {
+        themeCheckbox.checked = currentTheme === 'dark';
+        themeCheckbox.addEventListener('change', (e) => {
+            const newTheme = e.target.checked ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    } else if (oldThemeBtn) {
+        updateThemeIcon(currentTheme);
+        oldThemeBtn.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            let newTheme = theme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+    }
 
     function updateThemeIcon(theme) {
-        const icon = themeBtn?.querySelector('i');
+        if (!oldThemeBtn) return;
+        const icon = oldThemeBtn.querySelector('i');
         if (icon) {
             icon.className = theme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-        }
-    }
+        }    }
 
     // 3. Scroll Reveal Engine (Intersection Observer)
     const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');

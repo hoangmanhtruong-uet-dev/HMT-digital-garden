@@ -3,134 +3,495 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hồ sơ cá nhân, hành trình, kỹ năng và góc chia sẻ của Hoàng Mạnh Trường.">
     <title>Trang Cá Nhân — Hoàng Mạnh Trường</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/common.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/share-page.css?v=20260823-personal-stitch-2">
+    <link rel="stylesheet" href="../assets/css/about-redesign.css">
+    <link rel="stylesheet" href="../assets/css/about-cyber.css">
+    <!-- Three.js, GSAP & Lenis Smooth Scroll -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 </head>
 <body class="about-page personal-page">
-    <nav class="navbar-unified" aria-label="Điều hướng chính">
-        <a href="../index.html" class="nav-logo"><i class="fa-solid fa-circle-user"></i> Mtruong<span>_dev</span></a>
-        <ul class="nav-links-unified">
+    <!-- Three.js Background Canvas -->
+    <div id="cyber-three-bg"></div>
+
+    <nav class="navbar-unified navbar-dynamic-island">
+        <a href="../index.html" class="nav-logo">
+            <i class="fa-solid fa-circle-user"></i> Mtruong<span>_dev</span>
+        </a>
+                <ul class="nav-links-unified">
             <li><a href="../index.html">Trang Chủ</a></li>
-            <li><a class="active" href="about.html">Cá Nhân</a></li>
-            <li><a href="teaching.html">Giảng Dạy</a></li>
+            <li><a href="about.html">Cá Nhân</a></li>
+            <li>
+                <a href="teaching.html">Giảng Dạy <i class="fa-solid fa-angle-down" style="font-size: 0.7em;"></i></a>
+                <ul class="nav-dropdown">
+                    <li><a href="teaching.html#about">Giới thiệu</a></li>
+                    <li><a href="teaching.html#programs">Lộ trình học</a></li>
+                    <li><a href="teaching.html#pricing">Học phí</a></li>
+                    <li><a href="teaching.html#resources">Góc học tập</a></li>
+                    <li><a href="teaching.html#research">Nghiên cứu</a></li>
+                </ul>
+            </li>
             <li><a href="muctieu.html">Mục Tiêu</a></li>
             <li><a href="projects.html">Dự Án</a></li>
         </ul>
         <div id="auth-controls" class="nav-auth">
-            <button class="theme-toggle" type="button" title="Chuyển chế độ Sáng/Tối" aria-label="Chuyển chế độ màu"><i class="fa-solid fa-moon"></i></button>
-            <div id="guest-links"></div>
-            <div id="user-links" style="display:none;gap:10px;align-items:center"><span id="nav-user-name" class="user-badge"></span><button onclick="logout()" class="logout-btn">Thoát</button></div>
+            <label id="theme-toggle-button">
+  <input type="checkbox" id="toggle">
+  <svg viewBox="0 0 69.667 44" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(3.5 3.5)" data-name="Component 15 – 1" id="Component_15_1">
+      <g filter="url(#container)" transform="matrix(1, 0, 0, 1, -3.5, -3.5)">
+        <rect fill="#83cbd8" transform="translate(3.5 3.5)" rx="17.5" height="35" width="60.667" data-name="container" id="container"></rect>
+      </g>
+      <g transform="translate(2.333 2.333)" id="button">
+        <g data-name="sun" id="sun">
+          <g filter="url(#sun-outer)" transform="matrix(1, 0, 0, 1, -5.83, -5.83)">
+            <circle fill="#f8e664" transform="translate(5.83 5.83)" r="15.167" cy="15.167" cx="15.167" data-name="sun-outer" id="sun-outer-2"></circle>
+          </g>
+          <g filter="url(#sun)" transform="matrix(1, 0, 0, 1, -5.83, -5.83)">
+            <path fill="rgba(246,254,247,0.29)" transform="translate(9.33 9.33)" d="M11.667,0A11.667,11.667,0,1,1,0,11.667,11.667,11.667,0,0,1,11.667,0Z" data-name="sun" id="sun-3"></path>
+          </g>
+          <circle fill="#fcf4b9" transform="translate(8.167 8.167)" r="7" cy="7" cx="7" id="sun-inner"></circle>
+        </g>
+        <g data-name="moon" id="moon">
+          <g filter="url(#moon)" transform="matrix(1, 0, 0, 1, -31.5, -5.83)">
+            <circle fill="#cce6ee" transform="translate(31.5 5.83)" r="15.167" cy="15.167" cx="15.167" data-name="moon" id="moon-3"></circle>
+          </g>
+          <g fill="#a6cad0" transform="translate(-24.415 -1.009)" id="patches">
+            <circle transform="translate(43.009 4.496)" r="2" cy="2" cx="2"></circle>
+            <circle transform="translate(39.366 17.952)" r="2" cy="2" cx="2" data-name="patch"></circle>
+            <circle transform="translate(33.016 8.044)" r="1" cy="1" cx="1" data-name="patch"></circle>
+            <circle transform="translate(51.081 18.888)" r="1" cy="1" cx="1" data-name="patch"></circle>
+            <circle transform="translate(33.016 22.503)" r="1" cy="1" cx="1" data-name="patch"></circle>
+            <circle transform="translate(50.081 10.53)" r="1.5" cy="1.5" cx="1.5" data-name="patch"></circle>
+          </g>
+        </g>
+      </g>
+      <g filter="url(#cloud)" transform="matrix(1, 0, 0, 1, -3.5, -3.5)">
+        <path fill="#fff" transform="translate(-3466.47 -160.94)" d="M3512.81,173.815a4.463,4.463,0,0,1,2.243.62.95.95,0,0,1,.72-1.281,4.852,4.852,0,0,1,2.623.519c.034.02-.5-1.968.281-2.716a2.117,2.117,0,0,1,2.829-.274,1.821,1.821,0,0,1,.854,1.858c.063.037,2.594-.049,3.285,1.273s-.865,2.544-.807,2.626a12.192,12.192,0,0,1,2.278.892c.553.448,1.106,1.992-1.62,2.927a7.742,7.742,0,0,1-3.762-.3c-1.28-.49-1.181-2.65-1.137-2.624s-1.417,2.2-2.623,2.2a4.172,4.172,0,0,1-2.394-1.206,3.825,3.825,0,0,1-2.771.774c-3.429-.46-2.333-3.267-2.2-3.55A3.721,3.721,0,0,1,3512.81,173.815Z" data-name="cloud" id="cloud"></path>
+      </g>
+      <g fill="#def8ff" transform="translate(3.585 1.325)" id="stars">
+        <path transform="matrix(-1, 0.017, -0.017, -1, 24.231, 3.055)" d="M.774,0,.566.559,0,.539.458.933.25,1.492l.485-.361.458.394L1.024.953,1.509.592.943.572Z"></path>
+        <path transform="matrix(-0.777, 0.629, -0.629, -0.777, 23.185, 12.358)" d="M1.341.529.836.472.736,0,.505.46,0,.4.4.729l-.231.46L.605.932l.4.326L.9.786Z" data-name="star"></path>
+        <path transform="matrix(0.438, 0.899, -0.899, 0.438, 23.177, 29.735)" d="M.015,1.065.475.9l.285.365L.766.772l.46-.164L.745.494.751,0,.481.407,0,.293.285.658Z" data-name="star"></path>
+        <path transform="translate(12.677 0.388) rotate(104)" d="M1.161,1.6,1.059,1,1.574.722.962.607.86,0,.613.572,0,.457.446.881.2,1.454l.516-.274Z" data-name="star"></path>
+        <path transform="matrix(-0.07, 0.998, -0.998, -0.07, 11.066, 15.457)" d="M.873,1.648l.114-.62L1.579.945,1.03.62,1.144,0,.706.464.157.139.438.7,0,1.167l.592-.083Z" data-name="star"></path>
+        <path transform="translate(8.326 28.061) rotate(11)" d="M.593,0,.638.724,0,.982l.7.211.045.724.36-.64.7.211L1.342.935,1.7.294,1.063.552Z" data-name="star"></path>
+        <path transform="translate(5.012 5.962) rotate(172)" d="M.816,0,.5.455,0,.311.323.767l-.312.455.516-.215.323.456L.827.911,1.343.7.839.552Z" data-name="star"></path>
+        <path transform="translate(2.218 14.616) rotate(169)" d="M1.261,0,.774.571.114.3.487.967,0,1.538.728,1.32l.372.662.047-.749.728-.218L1.215.749Z" data-name="star"></path>
+      </g>
+    </g>
+  </svg>
+</label>
+            <div id="guest-links">
+                <button onclick="window.promptAdmin()" class="btn-premium-nav" id="admin-login-label">Đăng nhập Admin</button>
+            </div>
+            <div id="user-links" style="display: none; gap: 10px; align-items: center;">
+                <span id="nav-user-name" class="user-badge"></span>
+                <button onclick="logout()" class="logout-btn">Thoát</button>
+            </div>
         </div>
     </nav>
+    
+    <main class="ar-container">
+        <!-- Background Effects -->
+        <div class="ar-bg-grid"></div>
+        <div class="ar-bg-glow"></div>
 
-    <main class="personal-shell">
-        <section class="personal-hero" aria-labelledby="personal-title">
-            <div class="personal-intro" data-reveal>
-                <span class="personal-kicker"><i class="fa-solid fa-terminal"></i> PROFILE · KNOWLEDGE · EXPERIENCE</span>
-                <h1 id="personal-title">Trang <span>Cá Nhân</span></h1>
-                <p>Hồ sơ, hành trình học tập và làm việc của mình trong lĩnh vực công nghệ. Một góc nhỏ ghi lại kỹ năng, kinh nghiệm và niềm đam mê tạo ra các giải pháp phần mềm chất lượng.</p>
-                <div class="personal-tags" aria-label="Lĩnh vực nổi bật"><span>#Backend</span><span>#Java</span><span>#Spring</span><span>#Education</span></div>
-            </div>
-
-            <article class="profile-card" data-reveal aria-label="Hồ sơ Hoàng Mạnh Trường">
-                <div class="profile-aura" aria-hidden="true"></div>
-                <img class="profile-avatar" src="../assets/images/profile-stitch.jpg" alt="Chân dung đại diện Hoàng Mạnh Trường" width="512" height="512">
-                <h2>Hoàng Mạnh Trường</h2>
-                <p>Sinh viên UET · Java Developer</p>
-                <dl class="profile-facts">
-                    <div><dt>2+</dt><dd>Năm học tập</dd></div>
-                    <div><dt>10+</dt><dd>Dự án</dd></div>
-                    <div><dt>1K+</dt><dd>Giờ code</dd></div>
-                </dl>
-                <button class="profile-action" id="download-profile" type="button"><i class="fa-solid fa-file-arrow-down"></i> Lưu hồ sơ PDF</button>
-            </article>
-        </section>
-
-        <section class="personal-bento" aria-label="Hành trình và kỹ năng">
-            <article class="bento-card journey-card" data-reveal>
-                <div class="card-heading"><i class="fa-solid fa-timeline"></i><h2>Hành Trình</h2></div>
-                <div class="journey-line">
-                    <div class="journey-item is-current">
-                        <span class="journey-dot"></span>
-                        <p class="journey-date">2024 — Hiện tại</p>
-                        <h3>Sinh viên UET</h3>
-                        <p>Học tại Đại học Công nghệ — ĐHQGHN, tập trung Java, cấu trúc dữ liệu, cơ sở dữ liệu và kiến trúc Backend.</p>
-                        <div class="mini-tags"><span>Java</span><span>MySQL</span><span>Spring</span></div>
+        <!-- 1. Hero -->
+        <section class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content hero-reveal delay-1">
+                    <!-- Live Status Badge with Green Radar Ping -->
+                    <div class="cyber-status-badge">
+                        <span class="pulse-indicator"></span>
+                        <span>Open to Internship · Backend & Security Architecture</span>
                     </div>
-                    <div class="journey-item">
-                        <span class="journey-dot"></span>
-                        <p class="journey-date">Trước đó</p>
-                        <h3>THPT &amp; ĐGNL</h3>
-                        <p>Đạt 27.75 điểm khối A00 và Giải Nhì học sinh giỏi cấp Tỉnh.</p>
+
+                    <!-- Hero Title with Hacker Decrypt Animation -->
+                    <h1 class="hero-title">
+                        <span class="scramble-target" data-text="Xây phần mềm vững chắc,">Xây phần mềm vững chắc,</span><br>
+                        <span class="hero-gradient scramble-target" data-text="an toàn ngay từ thiết kế.">an toàn ngay từ thiết kế.</span>
+                    </h1>
+                    <p class="hero-bio">Sinh viên CNTT tại UET – ĐHQGHN (K70). Định hướng chuyên sâu Software Engineer, xây dựng kiến trúc Microservices hiệu năng cao và giải pháp bảo mật dữ liệu toàn diện.</p>
+                    
+                    <div class="hero-cta-row">
+                        <a href="projects.html" class="hero-btn-primary"><i class="fa-solid fa-code-branch" style="margin-right:8px;"></i> Xem dự án</a>
+                        <button class="hero-btn-secondary cv-trigger-btn"><i class="fa-solid fa-file-pdf" style="margin-right:8px;"></i> Tải CV (PDF)</button>
+                        <div class="hero-social-icons" style="display:flex; gap:16px;">
+                            <a href="https://github.com/Mtruong2004" target="_blank" class="hero-icon-link" aria-label="GitHub Profile"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" class="hero-icon-link" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <button id="cmd-k-trigger" class="hero-icon-link" title="Command Palette (Ctrl + K)" onclick="window.dispatchEvent(new KeyboardEvent('keydown', {'key': 'k', 'ctrlKey': true}))"><i class="fa-solid fa-terminal"></i></button>
+                        </div>
                     </div>
                 </div>
-                <a class="outline-action" href="timeline.html">Xem toàn bộ hành trình <i class="fa-solid fa-arrow-right"></i></a>
-            </article>
+                
+                <div class="hero-visual hero-reveal delay-2">
+                    <!-- 3D Interactive Bento Card with Parallax Floating Badges & 3D Shield -->
+                    <div class="cyber-bento-card">
+                        <!-- Floating Tech Badges bay bồng bềnh 3D -->
+                        <div class="floating-badge badge-java">
+                            <i class="fa-brands fa-java"></i> Java Core
+                        </div>
+                        <div class="floating-badge badge-spring">
+                            <i class="fa-solid fa-leaf"></i> Spring Boot
+                        </div>
+                        <div class="floating-badge badge-docker">
+                            <i class="fa-brands fa-docker"></i> Docker
+                        </div>
+                        <div class="floating-badge badge-security">
+                            <i class="fa-solid fa-shield-halved"></i> AppSec / ZeroTrust
+                        </div>
 
-            <div class="bento-side">
-                <article class="bento-card skills-card" data-reveal>
-                    <div class="card-heading card-heading-row">
-                        <div><i class="fa-solid fa-bolt"></i><h2>Kỹ Năng Nổi Bật</h2></div>
-                        <a href="skills.html">Xem tất cả <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    </div>
-                    <div class="skills-grid" aria-label="Danh sách kỹ năng">
-                        <div><i class="fa-brands fa-java"></i><span>Java</span></div>
-                        <div><i class="fa-solid fa-leaf"></i><span>Spring</span></div>
-                        <div><i class="fa-brands fa-js"></i><span>JS / TS</span></div>
-                        <div><i class="fa-brands fa-react"></i><span>React</span></div>
-                        <div><i class="fa-solid fa-server"></i><span>REST API</span></div>
-                        <div><i class="fa-solid fa-database"></i><span>MySQL</span></div>
-                        <div><i class="fa-solid fa-layer-group"></i><span>Postgres</span></div>
-                        <div><i class="fa-brands fa-git-alt"></i><span>Git</span></div>
-                        <div><i class="fa-brands fa-docker"></i><span>Docker</span></div>
-                    </div>
-                </article>
+                        <div class="avatar-3d-box">
+                            <div class="avatar-rim-light"></div>
+                            <img src="../assets/images/profile-new.jpg" alt="Hoàng Mạnh Trường - Portrait" onerror="this.src='https://images.unsplash.com/photo-1531297172867-a12034104c13?w=500&h=500&fit=crop'">
+                            <!-- Mini 3D Three.js Cipher Shield Canvas -->
+                            <div class="shield-3d-canvas-wrapper" id="shield-3d-canvas" title="3D Cipher Security Node"></div>
+                        </div>
 
-                <div class="explore-strip" data-reveal>
-                    <a href="love.html"><span class="explore-icon love"><i class="fa-solid fa-heart"></i></span><span><small>LIVE</small><strong>Tình Yêu</strong></span><i class="fa-solid fa-arrow-right"></i></a>
-                    <a href="education.html"><span class="explore-icon"><i class="fa-solid fa-graduation-cap"></i></span><span><small>UET</small><strong>Học Vấn</strong></span><i class="fa-solid fa-arrow-right"></i></a>
-                    <a href="experience.html"><span class="explore-icon"><i class="fa-solid fa-briefcase"></i></span><span><small>JAVA</small><strong>Kinh Nghiệm</strong></span><i class="fa-solid fa-arrow-right"></i></a>
+                        <div class="hero-caption" style="margin-top: 14px; text-align: center;">
+                            <div class="hero-name" style="font-size: 1.15rem; font-weight: 700; color: #fff;">Hoàng Mạnh Trường</div>
+                            <div class="hero-role" style="font-size: 0.85rem; color: #2dd4a7; font-family: monospace;">UET K70 · Backend & Security Engineer</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="knowledge-share" id="knowledge" aria-labelledby="knowledge-title">
-            <header class="knowledge-header" data-reveal>
-                <div>
-                    <span class="section-kicker">KIẾN THỨC · GIA SƯ · KINH NGHIỆM</span>
-                    <h2 id="knowledge-title"><i class="fa-regular fa-newspaper"></i> Góc chia sẻ</h2>
-                    <p>Kiến thức lập trình, kinh nghiệm học tập và mẹo giảng dạy được tổng hợp tại một nơi.</p>
+
+
+        <!-- 4. Tech Stack -->
+        <section id="tech-stack" class="tech-section">
+            <div class="tech-container">
+                <div class="tech-header">
+                    <h2 class="tech-title"><span>01.</span> Tech Stack</h2>
+                    <p class="tech-desc">Những công nghệ mình dùng hằng ngày và những thứ đang học. Mức độ được tự đánh giá dựa trên số dự án đã làm.</p>
                 </div>
-                <div class="blog-filters" role="group" aria-label="Lọc bài viết">
-                    <button class="filter-btn active" type="button" data-filter="all">Tất cả</button>
-                    <button class="filter-btn" type="button" data-filter="it">Công nghệ</button>
-                    <button class="filter-btn" type="button" data-filter="tutor">Gia sư</button>
-                    <button class="filter-btn" type="button" data-filter="experience">Kinh nghiệm</button>
+                
+                <div class="tech-stats" id="tech-stats-container">
+                    <!-- JS fills this -->
                 </div>
-            </header>
-            <div class="blog-grid" id="blog-grid" aria-live="polite"></div>
+
+                <div class="tech-controls">
+                    <div class="tech-filters" id="tech-filters-container" role="group" aria-label="Lọc theo nhóm công nghệ">
+                        <!-- JS fills this -->
+                    </div>
+                    <div class="tech-search-wrapper">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" id="tech-search" placeholder="Tìm kiếm công nghệ..." class="tech-search-input" aria-label="Tìm kiếm công nghệ">
+                    </div>
+                </div>
+                
+                <div class="tech-legend">
+                    <span>Mức độ:</span>
+                    <span class="legend-item"><div class="legend-bar bar-1"></div> Đang học</span>
+                    <span class="legend-item"><div class="legend-bar bar-2"></div> Cơ bản</span>
+                    <span class="legend-item"><div class="legend-bar bar-3"></div> Khá</span>
+                    <span class="legend-item"><div class="legend-bar bar-4"></div> Thành thạo</span>
+                </div>
+
+                <div class="tech-grid" id="tech-grid-container">
+                    <!-- JS fills this -->
+                </div>
+
+                <div class="tech-learning">
+                    <h3 class="tech-learning-title"><i class="fa-solid fa-clock-rotate-left"></i> Đang học / Tìm hiểu thêm</h3>
+                    <div class="tech-learning-chips" id="tech-learning-container">
+                        <!-- JS fills this -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tech Modal/Tooltip -->
+            <dialog id="tech-dialog" class="tech-dialog">
+                <div class="tech-dialog-content">
+                    <button class="tech-dialog-close" aria-label="Đóng"><i class="fa-solid fa-times"></i></button>
+                    <div id="tech-dialog-body"></div>
+                </div>
+            </dialog>
+        </section>
+
+        <!-- 5. Educator -->
+        <section class="ar-section ar-edu-section ar-reveal">
+            <div class="ar-edu-left">
+                <h2 class="ar-section-title" style="margin-bottom:24px;"><span>03.</span> Tech <span>Educator</span></h2>
+                <p>Không chỉ viết code, mình còn đam mê việc đơn giản hóa các khái niệm phức tạp để truyền đạt lại cho người khác. Sự thấu hiểu thực sự đến từ việc bạn có thể giải thích nó một cách dễ dàng.</p>
+                
+                <div class="ar-edu-feature">
+                    <i class="fa-solid fa-code"></i>
+                    <div>
+                        <h4>Học qua dự án thực tế</h4>
+                        <p>Lý thuyết đi đôi với thực hành. Xây dựng mini-project ngay trong khóa học.</p>
+                    </div>
+                </div>
+                <div class="ar-edu-feature">
+                    <i class="fa-solid fa-comments"></i>
+                    <div>
+                        <h4>Code Review & Feedback</h4>
+                        <p>Nhận xét chi tiết từng dòng code, tối ưu hóa thuật toán và clean code.</p>
+                    </div>
+                </div>
+                <div class="ar-edu-feature">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <div>
+                        <h4>Nền tảng vững chắc</h4>
+                        <p>Từ Java Basic, OOP, Cấu trúc dữ liệu đến Spring Boot Backend.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ar-edu-right">
+                <div class="ar-edu-card" style="border-left: 4px solid var(--ar-warm)">
+                    <div>
+                        <h4>Khóa Java Nền Tảng</h4>
+                        <p>Dành cho người mới bắt đầu, mất gốc.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right" style="color:var(--ar-text-muted)"></i>
+                </div>
+                <div class="ar-edu-card" style="border-left: 4px solid var(--ar-warm)">
+                    <div>
+                        <h4>OOP & Thuật toán</h4>
+                        <p>Luyện tư duy, chuẩn bị phỏng vấn, thi cử.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right" style="color:var(--ar-text-muted)"></i>
+                </div>
+                <div class="ar-edu-card" style="border-left: 4px solid var(--ar-warm)">
+                    <div>
+                        <h4>Thực hành Spring Boot</h4>
+                        <p>Làm RESTful API, Database, Security.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right" style="color:var(--ar-text-muted)"></i>
+                </div>
+                <a href="teaching.html" class="ar-btn ar-btn-warm">Xem chi tiết các khóa học</a>
+            </div>
+        </section>
+
+        <!-- 6. Projects -->
+        <section class="ar-section ar-reveal">
+            <h2 class="ar-section-title"><span>04.</span> Dự án nổi bật</h2>
+            <div class="ar-projects-grid">
+                <!-- Project 1 -->
+                <div class="ar-project-card" style="position:relative;">
+                    <div class="arch-preview-tooltip">
+                        <div class="arch-header"><i class="fa-solid fa-network-wired"></i> Architecture Flow</div>
+                        <div>Client ➔ Spring Cloud Gateway ➔ Auth Service (JWT) ➔ Business Services</div>
+                        <div class="arch-flow">
+                            <span>Redis: Cache</span>
+                            <span>Docker: Deploy</span>
+                        </div>
+                    </div>
+                    <div class="ar-project-img">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&h=300&fit=crop" alt="Project 1">
+                    </div>
+                    <div class="ar-project-content">
+                        <h3>Secure Cloud Banking Core</h3>
+                        <p>Hệ thống xử lý giao dịch lõi ngân hàng mô phỏng kiến trúc microservices với bảo mật đa tầng, chống gian lận và xác thực OAuth2.</p>
+                        <div class="ar-project-tags">
+                            <span class="ar-project-tag">Java</span>
+                            <span class="ar-project-tag">Spring Boot</span>
+                            <span class="ar-project-tag">MySQL</span>
+                        </div>
+                        <div class="ar-project-actions">
+                            <a href="#" class="ar-btn ar-btn-outline" style="padding: 8px 16px; font-size: 0.9rem;">Demo</a>
+                            <a href="#" class="ar-btn ar-btn-ghost" style="padding: 8px 16px; font-size: 0.9rem;">Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="ar-project-card" style="position:relative;">
+                    <div class="arch-preview-tooltip">
+                        <div class="arch-header"><i class="fa-solid fa-server"></i> Sandbox Architecture</div>
+                        <div>Judge API ➔ Docker Container Isolation ➔ Cgroup Limits ➔ Result Broker</div>
+                        <div class="arch-flow">
+                            <span>SecComp: Safe</span>
+                            <span>PostgreSQL: Log</span>
+                        </div>
+                    </div>
+                    <div class="ar-project-img">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop" alt="Project 2">
+                    </div>
+                    <div class="ar-project-content">
+                        <h3>Secure Code Sandbox & Judge</h3>
+                        <p>Hệ thống chấm code tự động cho sinh viên CNTT với môi trường cô lập container an toàn tuyệt đối chống tấn công chiếm quyền máy chủ.</p>
+                        <div class="ar-project-tags">
+                            <span class="ar-project-tag">REST API</span>
+                            <span class="ar-project-tag">PostgreSQL</span>
+                        </div>
+                        <div class="ar-project-actions">
+                            <a href="#" class="ar-btn ar-btn-outline" style="padding: 8px 16px; font-size: 0.9rem;">Demo</a>
+                            <a href="#" class="ar-btn ar-btn-ghost" style="padding: 8px 16px; font-size: 0.9rem;">Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="ar-project-card" style="position:relative;">
+                    <div class="arch-preview-tooltip">
+                        <div class="arch-header"><i class="fa-solid fa-bolt"></i> Realtime Sync Architecture</div>
+                        <div>WebSocket Handshake ➔ Netty Broker ➔ Redis PubSub ➔ Event Persistence</div>
+                        <div class="arch-flow">
+                            <span>Latency < 20ms</span>
+                            <span>Kafka Stream</span>
+                        </div>
+                    </div>
+                    <div class="ar-project-img">
+                        <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bfce8?w=500&h=300&fit=crop" alt="Project 3">
+                    </div>
+                    <div class="ar-project-content">
+                        <h3>IoT & Realtime Monitoring System</h3>
+                        <p>Hạ tầng nhận dữ liệu cảm biến định vị thời gian thực, xử lý song song với Kafka và Redis Pub/Sub đảm bảo độ trễ thấp.</p>
+                        <div class="ar-project-tags">
+                            <span class="ar-project-tag">Java</span>
+                            <span class="ar-project-tag">Docker</span>
+                        </div>
+                        <div class="ar-project-actions">
+                            <a href="#" class="ar-btn ar-btn-outline" style="padding: 8px 16px; font-size: 0.9rem;">Demo</a>
+                            <a href="#" class="ar-btn ar-btn-ghost" style="padding: 8px 16px; font-size: 0.9rem;">Source</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Blog -->
+        <section class="ar-section ar-reveal">
+            <h2 class="ar-section-title"><span>05.</span> Góc chia sẻ</h2>
+            <div class="ar-empty-state">
+                <i class="fa-solid fa-pen-nib"></i>
+                <h3>Bài viết đầu tiên sắp ra mắt</h3>
+                <p>Mình đang ấp ủ những bài viết chia sẻ về kinh nghiệm học Java, giải thuật và các mẹo hay trong Spring Boot. Để lại email để nhận thông báo nhé!</p>
+                <form class="ar-subscribe" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký!');">
+                    <input type="email" placeholder="Email của bạn..." required>
+                    <button type="submit" class="ar-btn ar-btn-primary" style="padding: 12px;">Đăng ký</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 8. CTA -->
+        <section class="ar-cta ar-reveal">
+            <h2>Cùng xây dựng một điều gì đó?</h2>
+            <p>Sẵn sàng hợp tác, thực tập backend hoặc trao đổi về các cơ hội giảng dạy, chia sẻ công nghệ.</p>
+            <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+                <a href="mailto:truongcri0101@gmail.com" class="ar-btn ar-btn-primary"><i class="fa-solid fa-paper-plane"></i> Gửi tin nhắn cho mình</a>
+                <a href="https://github.com/Mtruong2004" target="_blank" class="ar-btn ar-btn-outline"><i class="fa-brands fa-github"></i> GitHub</a>
+                <a href="#" class="ar-btn ar-btn-outline"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            </div>
         </section>
     </main>
 
-    <nav class="personal-mobile-nav" aria-label="Điều hướng di động">
-        <a href="../index.html"><i class="fa-solid fa-house"></i><span>Trang chủ</span></a>
-        <a class="active" href="about.html"><i class="fa-solid fa-user"></i><span>Cá nhân</span></a>
-        <a href="teaching.html"><i class="fa-solid fa-graduation-cap"></i><span>Giảng dạy</span></a>
-        <a href="muctieu.html"><i class="fa-solid fa-bullseye"></i><span>Mục tiêu</span></a>
-        <a href="projects.html"><i class="fa-solid fa-terminal"></i><span>Dự án</span></a>
-    </nav>
+    <!-- Hacker Terminal Floating Trigger Button -->
+    <button id="terminal-toggle-btn" class="terminal-dock-btn" title="Mở Interactive Hacker Terminal">
+        <i class="fa-solid fa-terminal"></i> mtruong_cli
+    </button>
 
-    <footer data-shared-footer><p>&copy; 2026 Hoàng Mạnh Trường. Designed and Built with ❤️</p></footer>
-    <script src="../assets/js/share-page.js?v=20260823-personal-stitch"></script>
+    <!-- Hacker Terminal Modal Dialog -->
+    <div id="terminal-modal" class="terminal-modal-overlay">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-controls">
+                    <span class="terminal-dot close" id="terminal-close-btn" title="Đóng"></span>
+                    <span class="terminal-dot minimize"></span>
+                    <span class="terminal-dot maximize"></span>
+                </div>
+                <div class="terminal-title">
+                    <i class="fa-solid fa-shield-halved"></i> mtruong@uet-server: ~/portfolio
+                </div>
+                <div style="font-size: 0.72rem; color: #58a6ff;">bash 5.2</div>
+            </div>
+            <div class="terminal-body">
+                <div id="terminal-cli-output">
+                    <div class="terminal-output">
+                        <span class="prompt-accent">Cybersecurity Shell v2.4 initialized.</span><br>
+                        Chào mừng bạn đến với môi trường dòng lệnh tương tác của <span class="prompt-highlight">Hoàng Mạnh Trường</span>.<br>
+                        Gõ <span class="prompt-highlight">help</span> để xem các lệnh khả dụng (skills, projects, cat contact.txt, security).
+                    </div>
+                </div>
+                <div class="terminal-input-row">
+                    <span class="terminal-prompt">visitor@mtruong-dev:~$</span>
+                    <input type="text" id="terminal-cli-input" class="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Command Palette (Ctrl + K / Cmd + K) -->
+    <div id="cmd-palette-modal" class="cmd-palette-overlay">
+        <div class="cmd-palette-box">
+            <div class="cmd-palette-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="cmd-palette-input" class="cmd-palette-input" placeholder="Tìm kiếm trang, thao tác, hoặc gõ lệnh... (ESC để đóng)">
+            </div>
+            <div class="cmd-palette-list" id="cmd-palette-list">
+                <!-- Dynamically filled by JS -->
+            </div>
+            <div class="cmd-palette-hint">
+                <span>Dùng phím mũi tên hoặc click để chọn</span>
+                <span><kbd>ESC</kbd> để thoát</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic CV Preview & Download Modal -->
+    <div id="cv-preview-modal" class="cv-preview-modal-overlay">
+        <div class="cv-preview-card">
+            <div class="cv-preview-header">
+                <div class="cv-preview-title">
+                    <i class="fa-solid fa-file-pdf" style="color: #ef4444;"></i>
+                    <span>HoangManhTruong_Backend_CV.pdf</span>
+                    <span id="cv-download-count" class="cv-download-counter">142 lượt tải</span>
+                </div>
+                <div class="cv-preview-actions">
+                    <button id="cv-modal-download-btn" class="ar-btn ar-btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">
+                        <i class="fa-solid fa-download"></i> Tải PDF
+                    </button>
+                    <button id="cv-preview-close" style="background:none; border:none; color:#8b949e; font-size:1.2rem; cursor:pointer; margin-left: 8px;">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="cv-preview-body">
+                <div class="cv-mock-page">
+                    <div class="cv-mock-header">
+                        <div>
+                            <div class="cv-mock-name">HOÀNG MẠNH TRƯỜNG</div>
+                            <div class="cv-mock-role">SOFTWARE ENGINEER / BACKEND DEVELOPER</div>
+                        </div>
+                        <div style="text-align: right; font-size: 0.78rem; color: #64748b;">
+                            truongcri0101@gmail.com<br>
+                            github.com/Mtruong2004<br>
+                            Hà Nội, Việt Nam
+                        </div>
+                    </div>
+                    <div class="cv-mock-section">
+                        <div class="cv-mock-sec-title">Học Vấn</div>
+                        <strong>Đại học Công nghệ – ĐHQGHN (UET)</strong> | Cử nhân Công nghệ Thông tin (K70)<br>
+                        <span style="color: #64748b;">Trọng tâm: Cấu trúc dữ liệu & Giải thuật, Hệ điều hành, Mạng máy tính, An toàn hệ thống.</span>
+                    </div>
+                    <div class="cv-mock-section">
+                        <div class="cv-mock-sec-title">Kỹ Năng Kỹ Thuật</div>
+                        • <strong>Ngôn ngữ:</strong> Java (OOP, Concurrency, Stream API), SQL, C++<br>
+                        • <strong>Framework & Công cụ:</strong> Spring Boot, Spring Security, Hibernate/JPA, Docker, Git<br>
+                        • <strong>Database & Cache:</strong> MySQL, PostgreSQL, Redis<br>
+                        • <strong>Kiến trúc & Bảo mật:</strong> RESTful APIs, Microservices, JWT/OAuth2, Threat Modeling
+                    </div>
+                    <div class="cv-mock-section">
+                        <div class="cv-mock-sec-title">Dự Án Tiêu Biểu</div>
+                        <strong>Secure Banking Core Service</strong> — Spring Boot, Spring Cloud, PostgreSQL, Docker.<br>
+                        <strong>Online Judge Code Isolation Engine</strong> — Java Sandbox, Docker container isolation.<br>
+                        <strong>IoT Realtime Location Broker</strong> — WebSocket, Redis Pub/Sub, Kafka stream.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="tutor-footer"></footer>
     <script src="../assets/js/common.js"></script>
-    <script src="../assets/js/api-client.js"></script>
-    <script src="../assets/js/chatbot.js"></script>
+    <script src="../assets/js/about-redesign.js"></script>
+    <script src="../assets/js/tech-stack.js"></script>
+    <script src="../assets/js/about-cyber.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import com.love.portfolio.config.PublicEndpoint;
 
 @RestController
 @RequestMapping("/api/exams")
@@ -19,6 +20,7 @@ public class ExamController {
 
     // GET tất cả đề thi (kèm câu hỏi)
     @GetMapping
+    @PublicEndpoint
     public List<Exam> getAllExams() {
         List<Exam> exams = examRepository.findAll();
         // Deserialize questions cho mỗi exam
@@ -28,6 +30,7 @@ public class ExamController {
 
     // GET 1 đề thi theo ID
     @GetMapping("/{id}")
+    @PublicEndpoint
     public ResponseEntity<Exam> getExam(@PathVariable Long id) {
         return examRepository.findById(id)
                 .map(exam -> {

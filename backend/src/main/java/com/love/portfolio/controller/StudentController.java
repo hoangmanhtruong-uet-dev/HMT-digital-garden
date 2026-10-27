@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -45,14 +43,8 @@ public class StudentController {
             return ResponseEntity.status(401).body("Tên đăng nhập hoặc mật khẩu không đúng.");
         }
         Student stored = foundStudent.get();
-        boolean legacyPassword = !stored.getPassword().startsWith("$2");
-        boolean matches = legacyPassword
-                ? MessageDigest.isEqual(stored.getPassword().getBytes(StandardCharsets.UTF_8), student.getPassword().getBytes(StandardCharsets.UTF_8))
-                : passwordEncoder.matches(student.getPassword(), stored.getPassword());
-        if (!matches) return ResponseEntity.status(401).body("Tên đăng nhập hoặc mật khẩu không đúng.");
-        if (legacyPassword) {
-            stored.setPassword(passwordEncoder.encode(student.getPassword()));
-            studentRepository.save(stored);
+        if (!passwordEncoder.matches(student.getPassword(), stored.getPassword())) {
+            return ResponseEntity.status(401).body("Tên đăng nhập hoặc mật khẩu không đúng.");
         }
         session.setAttribute("studentUsername", stored.getUsername());
         return ResponseEntity.ok(stored);
@@ -83,17 +75,17 @@ public class StudentController {
             student.setQuizCount(newCount);
             student.setAvgScore(newAvg);
             
-            // Cập nhật lịch sử (lưu dạng JSON string)
-            String historyJson = String.format("{\"examTitle\":\"%s\",\"score\":%.1f,\"date\":\"%s\"}", 
-                    request.getExamTitle(), request.getScore(), new java.util.Date().toString());
+            // Cập nhật lịch sử thông qua Entity mới
+            com.love.portfolio.model.QuizHistory history = new com.love.portfolio.model.QuizHistory();
+            history.setExamTitle(request.getExamTitle());
+            history.setScore(request.getScore());
+            history.setDate(new java.util.Date().toString());
+            history.setStudent(student);
             
-            String currentHistory = student.getQuizHistory();
-            if (currentHistory == null || currentHistory.isEmpty() || currentHistory.equals("[]")) {
-                student.setQuizHistory("[" + historyJson + "]");
-            } else {
-                // Thêm vào chuỗi JSON array hiện tại
-                student.setQuizHistory(currentHistory.substring(0, currentHistory.length() - 1) + "," + historyJson + "]");
+            if (student.getQuizHistories() == null) {
+                student.setQuizHistories(new java.util.ArrayList<>());
             }
+            student.getQuizHistories().add(history);
             
             return ResponseEntity.ok(studentRepository.save(student));
         }
